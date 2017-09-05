@@ -11,6 +11,7 @@
 \usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{booktabs}
 
+\usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{abstract}
 \renewcommand{\abstractnamefont}{\normalfont\bfseries}
@@ -43,6 +44,9 @@
 
 
 \newcommand*\conj[1]{\overline{#1}}
+\newcommand*\norm[1]{\left \Vert #1 \right\Vert}
+\newcommand*\abs[1]{\left \vert #1 \right\vert}
+\newcommand*\adj[1]{#1^*}
 
 \theoremstyle{plain}
 \newtheorem*{theorem}{Theorem}
@@ -76,14 +80,14 @@ We looked at the general properties of Hermitian (self-adjoint) matrices, and us
 
 \lettrine[nindent=0em,lines=2]{I}n this paper we see the properties of Hermitian matrices, which are very interesting, as well as useful. We also see and prove the Schur-Cohn theorem to find the number of roots of a polynomial lying within the unit circle. 
 
-There are many ways to locate the roots of a polynomial. Using the Schur-Cohn theorem gives a nice estimate on how many roots lie inside the unit circle.
+There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem shows a surprising connection between linear algebra and roots of a polynomial to help find out how many roots lie inside and outside the unit circle.
 
 
 \section{Hermitian Matrices}
 
-The adjoint of a matrix \(A \in \mathbb{C}_n\) is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. The adjoint of matrix \(A\) is denoted by \(A^*\). If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(A^*\) is \(\conj{a_{ji}}\). We see that \(A^*\) is a linear transformation. The adjoint satisfies \(\langle Ax, y \rangle = \langle x, A^*y \rangle\). 
+The adjoint of a matrix \(A \in \mathbb{C}_n\) is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. The adjoint of matrix \(A\) is denoted by \(\adj{A}\). If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(\adj{A}\) is \(\conj{a_{ji}}\). We see that \(\adj{A}\) is a linear transformation. The adjoint satisfies \(\langle Ax, y \rangle = \langle x, \adj{A}y \rangle\). 
 
-Hermitian matrices (also known as self-adjoint matrices) are matrices that satisfy \(A^* = A\). All the eigenvalues of a Hermitian matrix are real. 
+Hermitian matrices (also known as self-adjoint matrices) are matrices that satisfy \(A = \adj{A}\). All the eigenvalues of a Hermitian matrix are real. 
 
 \begin{definition} Any matrix \(B \in \mathbb{M}_n\) that satisfies \(\langle Bx, x\rangle \ge 0\) for all \(x \in \mathbb{C}^n\) is called a positive semidefinite matrix. \end{definition}
 
@@ -92,21 +96,22 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 
 
 
-\(A^* A\) is always positive semidefinite. 
+\(\adj{A} A\) is always positive semidefinite. 
 
-Hermitian matrices can be diagonalized. For every Hermitian matrix A, there exists a diagonal matrix \(\Lambda\) such that \(A = U^* \Lambda U\). Here \(U\) is some unitary matrix. 
+Hermitian matrices can be diagonalized. For every Hermitian matrix \(A\), there exists a diagonal matrix \(\Lambda\) such that \(A = \adj{U}  \Lambda U\). Here \(U\) is some unitary matrix. 
 
 
 
-\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\langle Ax, x \rangle \in \mathbb{R}\) for every \(x\), then \(A = A^*\). \end{lemma}
+\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\langle Ax, x \rangle \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{lemma}
 \begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then \end{proof}
 
 \begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
 \section{Schur-Cohn Theorem}
 
-Given a polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\). Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
+Given any polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\) with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside. Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
 
-Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
+Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
+
 
 Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
 0 & 1 & 0 & \ldots & 0 \\
@@ -114,7 +119,7 @@ Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix}
 \vdots & \vdots & \vdots & & \vdots \\
 0 & 0 & 0 &\ldots & 0 \\
 0 & 0 & 0 & \ldots & 0 \\ 
-\end{bmatrix}\).  Note that it is nilpotent of order \(n\), i.e. \(S^n\) is a zero matrix. Then \(p(S) \) is \( \begin{bmatrix} 
+\end{bmatrix}\).  Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix. Then \(p(S) \) is \( \begin{bmatrix} 
 a_n & a_{n-1} & \ddots & \ddots & a_1 \\
 0 & a_n & a_{n-1} & \ddots & \ddots \\
 0 & 0 & a_n & \ddots & \ddots \\
@@ -123,25 +128,57 @@ a_n & a_{n-1} & \ddots & \ddots & a_1 \\
 \end{bmatrix}\). 
 
 
-This can be factorized as \(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). 
+This can be factorized as \(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). Let \(B_j = S - \alpha_jI\).
 
+Next, define \(q\) as the polynomial \(\conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\). Note that its roots are \(\frac {1}{\conj{\alpha_i}}\). We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\). Also, \(q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\). Let \(C_j= I -  \conj{\alpha_j} S\).
 
-Then define \(q\) as the polynomial with roots \(\frac {1}{\conj{\alpha_i}}\). We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\)
 
 
 Let \(H\) be equal to \(\lVert q(S) x \rVert^2 - \lVert p(S) x \rVert^2\)
 
+\(H\) can also be written as \(\langle (\adj{q(S)} q(S) - \adj{p(S)} p(S))x, x\rangle\).
+
+We can now state the Schur-Cohn theorem:
 
 \begin{theorem}The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \section{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
-\(q(S)^* q(S) - p(S)^* p(S) \\
-= (C_1C_2C_3 \ldots C_n)^*(C_1C_2C_3\ldots C_n) - (B_1B_2B_3\ldots B_n)^*(B_1B_2B_3\ldots B_n)\)
+\(\adj{q(S)} q(S) - \adj{p(S)} p(S) \\
+= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
 
+Let's look at \(\adj{C_1} C_1 - \adj{B_1} B_1\) first. Substituting the values of \(C_1\) and \(B_1\), we get 
+
+\begin{equation*}
+\begin{split}
+& \phantom{=}    \adj{C_1}C_1 - \adj{B_1} B_1 \\
+ & = \adj{(I - \conj{\alpha_1}S)} (I - \conj{\alpha_1}S) - \adj{(S - \alpha_1 I)} (S - \alpha_1 I) \\
+& = (I - \alpha_1\adj{S}) (I - \conj{\alpha_1}S) - (\adj{S} - \conj{\alpha_1} I) (S - \alpha_1 I) \\
+ & = (I - \alpha_1\adj{S} - \conj{\alpha_1}S + \abs{\alpha_1}^2 \adj{S} S) - (\adj{S} S - \alpha_1 \adj{S} - \conj{\alpha_1} S + \abs{\alpha_1}^2I)\\
+& = I - \abs{\alpha_1}^2 I - \adj{S} S + \abs{\alpha_1}^2 \adj{S} S \\
+& = (1 - \abs{\alpha_1}^2) (I - \adj{S} S)
+\end{split}
+\end{equation*}
+
+Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 1\), then the root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
 \section{Extensions}
 
 \section{Conclusion}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
