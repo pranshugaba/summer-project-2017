@@ -44,9 +44,13 @@
 
 \newcommand*\conj[1]{\overline{#1}}
 
+\theoremstyle{plain}
 \newtheorem*{theorem}{Theorem}
-\newtheorem*{definition}{Definition}
 \newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
 
 
 
@@ -77,7 +81,7 @@ There are many ways to locate the roots of a polynomial. Using the Schur-Cohn th
 
 \section{Hermitian Matrices}
 
-The adjoint of a matrix is its conjugate transpose. The \(ij\)th entry of \(A^*\) is \(\conj{a_{ji}}\)
+The adjoint of a matrix \(A \in \mathbb{C}_n\) is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. The adjoint of matrix \(A\) is denoted by \(A^*\). If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(A^*\) is \(\conj{a_{ji}}\). We see that \(A^*\) is a linear transformation. The adjoint satisfies \(\langle Ax, y \rangle = \langle x, A^*y \rangle\). 
 
 Hermitian matrices (also known as self-adjoint matrices) are matrices that satisfy \(A^* = A\). All the eigenvalues of a Hermitian matrix are real. 
 
@@ -85,11 +89,19 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 
 \begin{corollary}All the eigenvalues of positive semidefinite matrix are non-negative. \end{corollary}
 
-\begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
 
+
+
+\(A^* A\) is always positive semidefinite. 
 
 Hermitian matrices can be diagonalized. For every Hermitian matrix A, there exists a diagonal matrix \(\Lambda\) such that \(A = U^* \Lambda U\). Here \(U\) is some unitary matrix. 
 
+
+
+\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\langle Ax, x \rangle \in \mathbb{R}\) for every \(x\), then \(A = A^*\). \end{lemma}
+\begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then \end{proof}
+
+\begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
 \section{Schur-Cohn Theorem}
 
 Given a polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\). Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
