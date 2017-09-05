@@ -81,7 +81,7 @@ We looked at the general properties of Hermitian (self-adjoint) matrices, and us
 
 \lettrine[nindent=0em,lines=2]{I}n this paper we see the properties of Hermitian matrices, which are very interesting, as well as useful. We also see and prove the Schur-Cohn theorem to find the number of roots of a polynomial lying within the unit circle. 
 
-There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem shows a surprising connection between linear algebra and roots of a polynomial to help find out how many roots lie inside and outside the unit circle.
+There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem shows a surprising connection between linear algebra and roots of a polynomial. It will be used to find out how many roots of the polynomial lie inside and outside the unit circle.
 
 
 \section{Hermitian Matrices}
@@ -104,7 +104,7 @@ Hermitian matrices can be diagonalized. For every Hermitian matrix \(A\), there 
 
 
 \begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\langle Ax, x \rangle \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{lemma}
-\begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then \end{proof}
+\begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then `\end{proof}
 
 \begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
 \section{Schur-Cohn Theorem}
@@ -118,9 +118,11 @@ Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix}
 0 & 1 & 0 & \ldots & 0 \\
 0 & 0 & 1 & \ldots & 0 \\
 \vdots & \vdots & \vdots & & \vdots \\
-0 & 0 & 0 &\ldots & 0 \\
+0 & 0 & 0 &\ldots & 1 \\
 0 & 0 & 0 & \ldots & 0 \\ 
 \end{bmatrix}\).  Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix. Then \(p(S) \) is \( \begin{bmatrix} 
+
+% replace zeroes with dots
 a_n & a_{n-1} & \ddots & \ddots & a_1 \\
 0 & a_n & a_{n-1} & \ddots & \ddots \\
 0 & 0 & a_n & \ddots & \ddots \\
@@ -132,11 +134,12 @@ a_n & a_{n-1} & \ddots & \ddots & a_1 \\
 This can be factorized as \(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). Let \(B_j = S - \alpha_jI\).
 
 Next, define \(q\) as the polynomial \(\conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\). Note that its roots are \(\frac {1}{\conj{\alpha_i}}\). We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\). Also, \(q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\). Let \(C_j= I -  \conj{\alpha_j} S\).
-
+%Explain how roots of q are obtained.
 
 
 Let \(H\) be equal to \(\lVert q(S) x \rVert^2 - \lVert p(S) x \rVert^2\)
 
+%derive this expression of H
 \(H\) can also be written as \(\langle (\adj{q(S)} q(S) - \adj{p(S)} p(S))x, x\rangle\).
 
 We can now state the Schur-Cohn theorem:
@@ -146,7 +149,7 @@ We can now state the Schur-Cohn theorem:
 \section{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
-Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. \(\adj{q(S)} q(S) - \adj{p(S)} p(S) = \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
+Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. \(\adj{q(S)} q(S) - \adj{p(S)} p(S) \\= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
 
 Let's look at \(\adj{C_1} C_1 - \adj{B_1} B_1\) first. Substituting the values of \(C_1\) and \(B_1\), we get 
 
@@ -167,18 +170,3 @@ Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 
 \section{Conclusion}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
