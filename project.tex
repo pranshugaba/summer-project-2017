@@ -11,7 +11,7 @@
 \usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{booktabs}
 
-%\usepackage{mathtools}
+\usepackage{amsthm}
 \usepackage{abstract}
 \renewcommand{\abstractnamefont}{\normalfont\bfseries}
 \renewcommand{\abstracttextfont}{\normalfont\small}
@@ -28,7 +28,7 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyhead[C]{Running title $\bullet$ May 2016 $\bullet$ Vol. XXI, No. 1}
+\fancyhead[C]{Pranshu Gaba $\bullet$ Summer Project 2017 $\bullet$ Sr. No. 13718}
 \fancyfoot[RO, LE]{\thepage}
 
 
@@ -37,12 +37,16 @@
 
 \usepackage{mathtools}
 
-\setlength{\droptitle}{-4\baselineskip}
+\setlength{\droptitle}{-6\baselineskip}
 \pretitle{\begin{center}\huge\bfseries}
 \posttitle{\end{center}}
 
 
-\newcommand*\conj[1]{\bar{#1}}
+\newcommand*\conj[1]{\overline{#1}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newtheorem*{corollary}{Corollary}
 
 
 
@@ -56,7 +60,7 @@
 \renewcommand{\maketitlehookd}{%
 
 \begin{abstract}
-We looked at the general properties of Hermitian (self-adjoint) matrices, and used the Schur-Conn theorem to find the number of roots of a polynomial lying within the unit circle. 
+We looked at the general properties of Hermitian (self-adjoint) matrices, and used the Schur-Cohn theorem to find the number of roots of a polynomial lying within and without the unit circle. 
 \end{abstract}
 }
 
@@ -66,26 +70,49 @@ We looked at the general properties of Hermitian (self-adjoint) matrices, and us
 
 \section{Introduction}
 
-\lettrine[nindent=0em,lines=2]{I}n this project we see the properties of Hermitian matrices, which are very interesting, as well as useful. We also see and prove the Schur-Conn theorem to find the number of roots of a polynomial lying within the unit circle. 
+\lettrine[nindent=0em,lines=2]{I}n this paper we see the properties of Hermitian matrices, which are very interesting, as well as useful. We also see and prove the Schur-Cohn theorem to find the number of roots of a polynomial lying within the unit circle. 
 
-There are many ways to locate the roots of a polynomial. Using the Schur-Conn theorem gives a nice estimate on how many roots lie inside the unit circle.
+There are many ways to locate the roots of a polynomial. Using the Schur-Cohn theorem gives a nice estimate on how many roots lie inside the unit circle.
 
 
 \section{Hermitian Matrices}
-Hermitian matrices (also known as self-adjoint matrices) satisfy \(A^* = A\). 
+
+The adjoint of a matrix is its conjugate transpose. The \(ij\)th entry of \(A^*\) is \(\conj{a_{ji}}\)
+
+Hermitian matrices (also known as self-adjoint matrices) are matrices that satisfy \(A^* = A\). All the eigenvalues of a Hermitian matrix are real. 
+
+\begin{definition} Any matrix \(B \in \mathbb{M}_n\) that satisfies \(\langle Bx, x\rangle \ge 0\) for all \(x \in \mathbb{C}^n\) is called a positive semidefinite matrix. \end{definition}
+
+\begin{corollary}All the eigenvalues of positive semidefinite matrix are non-negative. \end{corollary}
+
+\begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
+
 
 Hermitian matrices can be diagonalized. For every Hermitian matrix A, there exists a diagonal matrix \(\Lambda\) such that \(A = U^* \Lambda U\). Here \(U\) is some unitary matrix. 
 
-\section{Schur-Conn Theorem}
+\section{Schur-Cohn Theorem}
 
 Given a polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\). Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
 
 Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
 
-Let \(S\) be the \(n \times n\) square matrix. Note that it is nilpotent of order \(n\), i.e. \(S^n\) is a zero matrix. Then \(p(S) = \text{Insert matrix here}\). 
+Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
+0 & 1 & 0 & \ldots & 0 \\
+0 & 0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots & & \vdots \\
+0 & 0 & 0 &\ldots & 0 \\
+0 & 0 & 0 & \ldots & 0 \\ 
+\end{bmatrix}\).  Note that it is nilpotent of order \(n\), i.e. \(S^n\) is a zero matrix. Then \(p(S) \) is \( \begin{bmatrix} 
+a_n & a_{n-1} & \ddots & \ddots & a_1 \\
+0 & a_n & a_{n-1} & \ddots & \ddots \\
+0 & 0 & a_n & \ddots & \ddots \\
+0 & 0 & 0 &\ddots & a_{n-1} \\
+0 & 0 & 0 & 0 & a_n \\ 
+\end{bmatrix}\). 
 
 
-\(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). 
+This can be factorized as \(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). 
+
 
 Then define \(q\) as the polynomial with roots \(\frac {1}{\conj{\alpha_i}}\). We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\)
 
@@ -93,10 +120,13 @@ Then define \(q\) as the polynomial with roots \(\frac {1}{\conj{\alpha_i}}\). W
 Let \(H\) be equal to \(\lVert q(S) x \rVert^2 - \lVert p(S) x \rVert^2\)
 
 
-The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. 
+\begin{theorem}The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \section{Proof}
-The proof is trivial and is left as an exercise to the reader. 
+%The proof is trivial and is left as an exercise to the reader. 
+
+\(q(S)^* q(S) - p(S)^* p(S) \\
+= (C_1C_2C_3 \ldots C_n)^*(C_1C_2C_3\ldots C_n) - (B_1B_2B_3\ldots B_n)^*(B_1B_2B_3\ldots B_n)\)
 
 \section{Extensions}
 
