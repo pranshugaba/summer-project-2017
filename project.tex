@@ -44,9 +44,10 @@
 
 
 \newcommand*\conj[1]{\overline{#1}}
+\newcommand*\adj[1]{#1^*}
 \newcommand*\norm[1]{\left \Vert #1 \right\Vert}
 \newcommand*\abs[1]{\left \vert #1 \right\vert}
-\newcommand*\adj[1]{#1^*}
+
 
 \theoremstyle{plain}
 \newtheorem*{theorem}{Theorem}
@@ -145,8 +146,7 @@ We can now state the Schur-Cohn theorem:
 \section{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
-\(\adj{q(S)} q(S) - \adj{p(S)} p(S) \\
-= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
+Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. \(\adj{q(S)} q(S) - \adj{p(S)} p(S) = \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
 
 Let's look at \(\adj{C_1} C_1 - \adj{B_1} B_1\) first. Substituting the values of \(C_1\) and \(B_1\), we get 
 
