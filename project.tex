@@ -105,8 +105,11 @@ A binary operator \(\inp{\cdot}{\cdot} \colon \mathbb{C}^n \times \mathbb{C}^n \
 
 \subsection{Adjoint}
 
-The adjoint of a matrix \(A \in \mathbb{C}_n\), denoted by \(\adj{A}\), is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(\adj{A}\) is \(\conj{a_{ji}}\). Note that \(\adj{A}\) is a linear transformation. The adjoint satisfies \(\inp{Ax}{y} = \inp{x}{\adj{A}y}\). 
+The adjoint of a matrix \(A \in \mathbb{C}_n\), denoted by \(\adj{A}\), is the matrix that  satisfies \(\inp{\adj{A}x}{y} = \inp{x}{Ay}\). 
 
+The adjoint can be obtained by taking its transpose, followed by taking the complex conjugate of every element. If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(\adj{A}\) is \(\conj{a_{ji}}\). Note that \(\adj{A}\) is a linear transformation.
+
+\(a_{ij}\) is defined as \(\inp{Ae_j}{e_i}\).
 
 \subsection{Positive Definite}
 
@@ -134,6 +137,7 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 
 \subsection{Unitary Matrices}
 
+A square matrix \(U\) is a unitary matrix if \(\adj{U} U = I\). The determinant of a unitary matrix is 1. It preserves inner product, \(\inp{Ux}{Uy} = \inp{x}{y}\).
 
 \subsection{Matrix \(S\)}
 Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
@@ -166,7 +170,7 @@ The trace of a matrix is the sum of the diagonal elements of the matrix.
 
 \(\Tr(A) = \sum_{i=1} ^n \inp{Ae_i}{ e_i}\)
 
-\begin{theorem}\(\Tr( \adj{A} A ) = \norm{A}_2\)\end{theorem}
+\begin{theorem}The trace of \(\adj{A}A\) is equal to the Hilbert-Schmidt norm of \(A\). \(\Tr( \adj{A} A ) = \norm{A}_2\)\end{theorem}
 
 \subsection{Diagonalization}
 
@@ -219,6 +223,8 @@ We can now state the Schur-Cohn theorem:
 \section{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
+We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees with the help of the Spectral theorem and the Courant-Fischer theorem. 
+
 
 \subsection{Linear Polynomial}
 
@@ -240,10 +246,17 @@ Let's look at \(\adj{C_1} C_1 - \adj{B_1} B_1\) first. Substituting the values o
 
 Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 1\), then the root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
 
-\subsection{Spectral theorem and proof}
+\subsection{Spectral theorem}
 
-\subsection{CF theorem and proof}
+\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then \(A\) can be written as \(U \Lambda \adj{U} \), where \(U\) is a unitary matrix, and \(\Lambda\) is a diagonal matrix with real entries. \end{theorem}
 
+\begin{proof} Left to the reader. \end{proof}
+
+\subsection{Courant-Fischer theorem}
+
+\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). \end{theorem}
+
+\begin{proof} Left to the reader. \end{proof}
 
 \section{Extensions}
 
