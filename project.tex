@@ -52,6 +52,8 @@
 \newcommand*\adj[1]{#1^*}
 \newcommand*\norm[1]{\left \Vert #1 \right\Vert}
 \newcommand*\abs[1]{\left \vert #1 \right\vert}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclarePairedDelimiterX{\inp}[2]{\langle}{\rangle}{#1, #2}
 
 
 \theoremstyle{plain}
@@ -85,6 +87,9 @@ We looked at the general properties of Hermitian (self-adjoint) matrices, and us
 \section{Introduction}
 
 %\lettrine[nindent=0em,lines=2]{I}
+
+
+
 In this paper we see the properties of Hermitian matrices, which are very interesting, as well as useful. We also see and prove the Schur-Cohn theorem to find the number of roots of a polynomial lying within the unit circle. 
 
 There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem shows a surprising connection between linear algebra and roots of a polynomial. It will be used to find out how many roots of the polynomial lie inside and outside the unit circle.
@@ -92,9 +97,15 @@ There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem 
 
 \section{Definitions}
 
+
+\subsection{Inner product}
+
+A binary operator \(\inp{\cdot}{\cdot} \colon \mathbb{C}^n \times \mathbb{C}^n \to \mathbb{C}\)
+
+
 \subsection{Adjoint}
 
-The adjoint of a matrix \(A \in \mathbb{C}_n\), denoted by \(\adj{A}\), is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(\adj{A}\) is \(\conj{a_{ji}}\). Note that \(\adj{A}\) is a linear transformation. The adjoint satisfies \(\langle Ax, y \rangle = \langle x, \adj{A}y \rangle\). 
+The adjoint of a matrix \(A \in \mathbb{C}_n\), denoted by \(\adj{A}\), is the matrix obtained by taking its transpose, followed by taking the complex conjugate of every element. If the \(ij^{\text{th}} \) of \(A\) is \(a_{ij}\), then the \(ij^{\text{th}}\) entry of \(\adj{A}\) is \(\conj{a_{ji}}\). Note that \(\adj{A}\) is a linear transformation. The adjoint satisfies \(\inp{Ax}{y} = \inp{x}{\adj{A}y}\). 
 
 
 \subsection{Positive Definite}
@@ -114,7 +125,11 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 
 
 
-\(\adj{A} A\) is always positive semidefinite. 
+\begin{theorem} \(\adj{A} A\) is always positive semidefinite. \end{theorem}
+
+\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 > 0\)\end{proof}
+
+
 
 
 \subsection{Unitary Matrices}
@@ -124,17 +139,34 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
 0 & 1 & 0 & \ldots & 0 \\
 0 & 0 & 1 & \ldots & 0 \\
-\vdots & \vdots & \vdots & & \vdots \\
+\vdots & \vdots & \vdots &\ddots & \vdots \\
 0 & 0 & 0 &\ldots & 1 \\
 0 & 0 & 0 & \ldots & 0 \\ 
-\end{bmatrix}\).  Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix.
+\end{bmatrix}\). 
+
+ Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix.
 
 
 \subsection{Norm of a matrix}
 
-\subsubsection{Operator}
+\subsubsection{Operator norm}
+Given \(A \in \mathbb{M}_n\), define \(\norm{A} =\displaystyle \sup _{x \neq 0} \frac{\norm{Ax}}{\norm{x}} = \sup_{\norm{x} = 1} \norm{Ax} \) to be the operator norm of \(A\). The triangle inequality \(\norm{A + B} \leq \norm{A} + \norm{B}\) is satisfied. 
 
-\subsubsection{Hilbert norm}
+\subsubsection{Hilbert-Schmidt norm}
+
+The Hilbert-Schmidt norm of matrix \(A\), is defined as the square root of sum of squares of all entries in \(A\). 
+
+ \[\norm{A}_2 = \left( \sum_{i, j} \abs{a_{ij}}^2 \right) ^{1/2}\]
+
+
+The operator norm is always less than or equal to the Hilbert-Schmidt norm.
+
+\subsection{Trace}
+The trace of a matrix is the sum of the diagonal elements of the matrix. 
+
+\(\Tr(A) = \sum_{i=1} ^n \inp{Ae_i}{ e_i}\)
+
+\begin{theorem}\(\Tr( \adj{A} A ) = \norm{A}_2\)\end{theorem}
 
 \subsection{Diagonalization}
 
@@ -143,12 +175,14 @@ Hermitian matrices can be diagonalized. For every Hermitian matrix \(A\), there 
 
 
 
-\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\langle Ax, x \rangle \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{lemma}
+\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{lemma}
 \begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then \end{proof}
 
 \begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
 
-\subsection{Projection}
+\subsection{Projectors}
+A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
+
 
 \section{Schur-Cohn Theorem}
 
@@ -173,10 +207,10 @@ Next, define \(q\) as the polynomial \(\conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \
 %Explain how roots of q are obtained.
 
 
-Let \(H\) be equal to \(\lVert q(S) x \rVert^2 - \lVert p(S) x \rVert^2\)
+Let \(H\) be equal to \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\)
 
 %derive this expression of H
-\(H\) can also be written as \(\langle (\adj{q(S)} q(S) - \adj{p(S)} p(S))x, x\rangle\).
+\(H\) can also be written as \(\inp{(\adj{q(S)} q(S) - \adj{p(S)} p(S))x}{ x}\).
 
 We can now state the Schur-Cohn theorem:
 
