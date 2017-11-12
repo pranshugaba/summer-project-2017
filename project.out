@@ -1,6 +1,22 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Definitions}{}% 2
-\BOOKMARK [1][-]{section.3}{Schur-Cohn Theorem}{}% 3
-\BOOKMARK [1][-]{section.4}{Proof}{}% 4
-\BOOKMARK [1][-]{section.5}{Extensions}{}% 5
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Adjoint}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Positive Definite}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Hermitian Matrices}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Unitary Matrices}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Matrix S}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Norm of a matrix}{section.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Operator}{subsection.2.6}% 9
+\BOOKMARK [3][-]{subsubsection.2.6.2}{Hilbert norm}{subsection.2.6}% 10
+\BOOKMARK [2][-]{subsection.2.7}{Diagonalization}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.8}{Projection}{section.2}% 12
+\BOOKMARK [1][-]{section.3}{Schur-Cohn Theorem}{}% 13
+\BOOKMARK [1][-]{section.4}{Proof}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Linear Polynomial}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Spectral theorem and proof}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{CF theorem and proof}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Extensions}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{Arbitrary radius}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Limitations}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 21
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 22
