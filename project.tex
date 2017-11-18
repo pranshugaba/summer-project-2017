@@ -254,11 +254,52 @@ Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 
 
 \subsection{Courant-Fischer theorem}
 
-\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). \end{theorem}
+\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then 
 
-\begin{proof} Left to the reader. \end{proof}
+  \[ \lambda_k = \min_{\omega_1, \ldots , \omega_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp \omega_1, \ldots , \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+
+ \end{theorem}
+
+
+
+
+\begin{proof} If \(x \neq 0\), then \(\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} \\
+ = \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\). and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
+
+
+
+Thus if \(\omega_1, \ldots , \omega_{n-k}\) are given, then 
+
+\[ \sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}}\]
+
+\(x \perp \omega\) if and only if \(y \perp \adj{U} \omega\). 
+
+\[ = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i}\]
+
+\[ \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2\]
+
+\[ = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2\]
+
+\[ \ge \lambda_k \]
+
+
+Let \(\omega_1 = x_n , \ldots , \ \omega_{n-k} = x_{k + 1}\)
+
+If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
+
+\(\inp{Ax}{x} = \inp{A \sum_{i = 1} ^ n c_i X_i}{ \sum_{i = 1} ^n c_i x_i}\)
+
+\( = \inp{\sum_{i = 1} ^n c_i \lambda_i x_i}{\sum_{i = 1} ^n c_i x_i}\)
+
+\(= \sum_{i = 1} ^ k \lambda_i \abs{c_i}^2\) 
+
+\( \le \lambda_k \sum_{i = 1} ^{k} \abs{c_i}^2\)
+
+
+\end{proof}
 
 \section{Extensions}
+
 
 \subsection{Arbitrary radius}
 
