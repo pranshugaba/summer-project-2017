@@ -100,7 +100,24 @@ There are many ways to locate the roots of a polynomial. The Schur-Cohn theorem 
 
 \subsection{Inner product}
 
-A binary operator \(\inp{\cdot}{\cdot} \colon \mathbb{C}^n \times \mathbb{C}^n \to \mathbb{C}\)
+A binary operator \(\inp{\cdot}{\cdot} \colon \mathbb{C}^n \times \mathbb{C}^n \to \mathbb{C}\). 
+
+\begin{itemize}
+\item It is linear in the first term. 
+
+\(\inp{ax}{y} = a \inp{x}{y}\)
+\(\inp{x + y}{z} = \inp{x}{z} + \inp{y}{z}\)
+
+\item It is conjugate when commutated
+
+\(\inp{x}{y} = \conj{\inp{y}{x}}\)
+
+\item Semi-positive definite
+
+\(\inp{x}{x} \ge 0\) for all \(x\).
+
+Equality is achieved if and only if \(x = 0\).
+\end{itemize}
 
 
 \subsection{Adjoint}
@@ -115,7 +132,8 @@ The adjoint can be obtained by taking its transpose, followed by taking the comp
 
 \begin{definition} Any matrix \(B \in \mathbb{M}_n\) that satisfies \(\langle Bx, x\rangle \ge 0\) for all \(x \in \mathbb{C}^n\) is called a positive semidefinite matrix. \end{definition}
 
-\begin{corollary}All the eigenvalues of positive semidefinite matrix are non-negative. \end{corollary}
+\begin{theorem}All the eigenvalues of positive semidefinite matrix are non-negative. \end{theorem}
+\begin{proof} Left to the reader. \end{proof}
 
 
 \subsection{Hermitian Matrices}
@@ -123,14 +141,39 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 
 \begin{theorem} All the eigenvalues of a Hermitian matrix are real. \end{theorem}
 
-\begin{proof}Left as an exercise. \end{proof}
+\begin{proof}
+Let \(v\) be an eigenvector of a Hermitian matrix, \(A\), and let \(\lambda\) be the corresponding eigenvalue. Then \(Av = \lambda v\). 
+
+\(\inp{Av}{v} = \inp{\lambda v}{v} = \lambda\inp{v}{v}\). Also \(\inp{Av}{v} = \inp{v}{\adj{A}v} = \inp{v}{Av} = \inp{v}{\lambda v} = \conj{\lambda} \inp{v}{v}\)
+
+This means \(\lambda \inp{v}{v} = \conj{\lambda} \inp{v}{v}\) for any \(v\). Since \(\lambda\) is the same conjugate as its complex conjugate, it implies \(\lambda\) is real. 
+ \end{proof}
 
 
+The converse of this is also true. 
+\begin{theorem} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{theorem}
 
+\begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then
+\(\inp{A(h + \alpha g)}{h + \alpha g} = \inp{Ah}{h} + \alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} + \abs{\alpha}^2 \inp{Ag}{g} \)
 
+So \(\alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} = \conj{\alpha} \inp{h}{Ag} + \alpha \inp{g}{Ah} \)
+
+When \(\alpha = 1\), \(\inp{Ag}{h} + \inp{Ah}{g} = \inp{h}{Ag} + \inp{g}{Ah}\)\
+
+When \(\alpha = i\), \(i \inp{Ag}{h} - i \inp{Ah}{g} = -i \inp{h}{Ag} + i \inp{g}{Ah}\)
+
+\(2i \inp{Ag}{h} = 2i \inp{g}{Ah}\) ot \(\inp{Ag}{h} = \inp{g}{Ah} = \inp{\adj{A}g}{h}\)
+
+\(Ag = \adj{A}g\) for all \(g\), therefore \(A = \adj{A}\). \(A\) is Hermitian.
+ \end{proof}
+
+\begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
+\begin{proof} Left to the reader. \end{proof}
+
+The converse is also true.
 \begin{theorem} \(\adj{A} A\) is always positive semidefinite. \end{theorem}
 
-\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 > 0\)\end{proof}
+\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
 
 
 
@@ -138,18 +181,6 @@ Hermitian matrices (also known as self-adjoint matrices) are matrices that satis
 \subsection{Unitary Matrices}
 
 A square matrix \(U\) is a unitary matrix if \(\adj{U} U = I\). The determinant of a unitary matrix is 1. It preserves inner product, \(\inp{Ux}{Uy} = \inp{x}{y}\).
-
-\subsection{Matrix \(S\)}
-Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
-0 & 1 & 0 & \ldots & 0 \\
-0 & 0 & 1 & \ldots & 0 \\
-\vdots & \vdots & \vdots &\ddots & \vdots \\
-0 & 0 & 0 &\ldots & 1 \\
-0 & 0 & 0 & \ldots & 0 \\ 
-\end{bmatrix}\). 
-
- Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix.
-
 
 \subsection{Norm of a matrix}
 
@@ -174,18 +205,12 @@ The trace of a matrix is the sum of the diagonal elements of the matrix.
 
 \subsection{Diagonalization}
 
-
 Hermitian matrices can be diagonalized. For every Hermitian matrix \(A\), there exists a diagonal matrix \(\Lambda\) such that \(A = \adj{U}  \Lambda U\). Here \(U\) is some unitary matrix. 
 
 
-
-\begin{lemma} If \(A \in \mathbb{M}_n (\mathbb{C})\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{lemma}
-\begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then \end{proof}
-
-\begin{corollary}Every positive semidefinite matrix is Hermitian.\end{corollary}
-
 \subsection{Projectors}
 A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
+
 
 
 \section{Schur-Cohn Theorem}
@@ -193,6 +218,18 @@ A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
 Given any polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\) with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside. Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
 
 Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
+
+Let \(S\) be the \(n \times n\) square matrix \( \begin{bmatrix} 
+0 & 1 & 0 & \ldots & 0 \\
+0 & 0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots &\ddots & \vdots \\
+0 & 0 & 0 &\ldots & 1 \\
+0 & 0 & 0 & \ldots & 0 \\ 
+\end{bmatrix}\). 
+
+ Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix.
+
+
 
  Then \(p(S) \) is \( \begin{bmatrix} 
 
@@ -298,12 +335,12 @@ If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\).
 
 \end{proof}
 
-\section{Extensions}
+%\section{Extensions}
 
 
-\subsection{Arbitrary radius}
+%\subsection{Arbitrary radius}
 
-\subsection{Limitations}
+%\subsection{Limitations}
 
 \section{Conclusion}
 Thank You!
