@@ -1,5 +1,3 @@
-
-
 \documentclass[twofold]{article}
 
 %\usepackage[sc]{mathpazo}
@@ -8,7 +6,6 @@
 \usepackage[T1]{fontenc}
 \linespread{1.05}
 \usepackage{microtype}
-
 
 \usepackage[english]{babel}
 
@@ -160,7 +157,6 @@ Let \(A \in \mathbb{M}_n\). The adjoint of matrix \(A\), denoted by \(\adj{A}\),
 
 
 \begin{proof} Using properties of inner product on \(\mathbb{C}^n\),
-
 \begin{equation*} \begin{split}
 \inp{\adj{A}x}{y} & = \trp{(\adj{A}x)} \conj{y}  \\
 & = \trp{x} \trp{(\adj{A})} \conj{y}\\
@@ -169,9 +165,9 @@ Let \(A \in \mathbb{M}_n\). The adjoint of matrix \(A\), denoted by \(\adj{A}\),
 
 Therefore \(\trp{(\adj{A})} = \conj{A}\), or \(\adj{A} = \trp{(\conj{A})}\). \end{proof}
 
-Note that the adjoint of the adjoint of a matrix is the original matrix itself, \(\adj{(\adj{A})} = A\).
+\begin{remark} The adjoint of the adjoint of a matrix is the original matrix itself, \(\adj{(\adj{A})} = A\). \end{remark}
 
-The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\).
+\begin{remark} The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\). \end{remark}
 
 
 \subsection{Positive Definite Matrix}
@@ -179,16 +175,18 @@ The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transforma
 A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x \in \mathbb{C}^n\) is called a {\em positive semidefinite matrix} and is denoted as \(A \ge 0\). If the inequality is strict, \(\inp{Ax}{x} > 0\), then \(A\) is called a {\em positive definite matrix}, and it is denoted as \(A > 0\). 
 
 \begin{theorem} Let \(A \in \mathbb{M}_n\) be a positive semidefinite matrix. Then all eigenvalues of \(A\) are non-negative. \end{theorem}
-\begin{proof} Let \(\lambda_1, \lambda_2, \ldots , \lambda n\) be the eigenvalues of \(A\), and let \(x_1, x_2, \ldots , x_n\) be the corresponding eigenvectors. For any eigenvector \(x_i\), \(\inp{Ax_i}{x_i} = \inp{\lambda_i x_i}{x_i} = \lambda_i \inp{x_i}{x_i}\). 
+\begin{proof} Let \(\lambda_1, \lambda_2, \ldots , \lambda_n\) be the eigenvalues of \(A\), and let \(x_1, x_2, \ldots , x_n\) be the corresponding eigenvectors, that is: \(Ax_i = \lambda x_i\). 
 
-\(\lambda_i = \frac{\inp{Ax_i}{x_i}}{\inp{x_i}{x_i}}\)
+ For any eigenvector \(x_i\), the inner product \(\inp{Ax_i}{x_i} = \inp{\lambda_i x_i}{x_i}\). Since \(\lambda_i\) is a scalar, it can come out of the inner product, so  \( \inp{\lambda_i x_i}{x_i}  = \lambda_i \inp{x_i}{x_i}\). We get
 
-\(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\). All eigenvalues of \(A\) are non-negative. \end{proof}
+\[\lambda_i = \frac{\inp{Ax_i}{x_i}}{\inp{x_i}{x_i}}\]
+
+Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\); all eigenvalues of \(A\) are non-negative. \end{proof}
 
 
 \begin{lemma} If \(A \ge 0\), then \(\displaystyle \norm{A} = \sup _{\norm{x} = 1} \inp{Ax}{x}\) \end{lemma}
 %check this proof. Looks wrong
-\begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
+\begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
 
 \begin{theorem} \(\adj{A} A\) is a positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
 \begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
@@ -198,10 +196,29 @@ A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x 
 A square matrix \(U\) that satisfies \(\adj{U} U = I\) is called a unitary matrix.
 
 \begin{theorem} The columns of a unitary matrix \(U\) form an orthonormal basis. \end{theorem}
-\begin{proof} \(U^{-1}\) exists, so each column is linearly independent.   \end{proof}
+\begin{proof}  Let \(u_i\) be the \(i^\text{th}\) column of \(U\). Then \(U = \begin{bmatrix} u_1 & u_2 & u_3 & \cdots & u_n \end{bmatrix}\) and \(\adj{U} = \begin{bmatrix} \adj{u_1} \\ \adj{u_2} \\ \adj{u_3} \\ \vdots \\ \adj{u_n} \end{bmatrix} \). 
+
+Using the fact that \(U\) is a unitary matrix, \(\adj{U} U = I\):
+
+\[  \begin{bmatrix} \adj{u_1} \\ \adj{u_2} \\ \adj{u_3} \\ \vdots \\ \adj{u_n} \end{bmatrix} \begin{bmatrix} u_1 & u_2 & u_3 & \cdots & u_n \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 & \cdots & 0 \\
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1\end{bmatrix}\]
+
+We see that \(\adj{u_i} u_j = \inp{u_i}{u_j} = \delta_{ij}\). Here \(\delta_{ij}\) is the Kronecker Delta function which is defined as
+
+\[\delta_{ij} = \begin{cases} 
+0 & \text{if } i \ne j \\
+1 & \text{if } i = j \end{cases}
+ \]
 
 
-\begin{theorem} It preserves inner product, \(\inp{Ux}{Uy} = \inp{x}{y}\). \end{theorem}
+Each column has norm 1 since \(\inp{u_i}{u_i}= \norm{u_i}^2  =1\), and any two columns are orthogonal \(\inp{u_i}{u_j} = 0\). Hence the column vectors \(u_1, u_2, \ldots , u_n\) of a unitary matrix form an orthonormal basis.
+    \end{proof}
+
+
+\begin{theorem} A unitary matrix preserves inner product: \(\inp{Ux}{Uy} = \inp{x}{y}\) for all  \(x, y \in \mathbb{C}_n\) . \end{theorem}
 
 \begin{proof} \(\inp{x}{y} = \inp{Ix}{y} = \inp{\adj{U}U x}{y} = \inp{Ux}{Uy}\) \end{proof}
 
@@ -212,8 +229,10 @@ The trace of matrix \(A\) is the sum of the diagonal elements of the matrix.
 
 \begin{remark}Here \(a_{ij}\) denotes the element in the \(i^{\text{th}}\) row and \(j^{\text{th}}\) column. \(e_i\) denotes the \(i^{\text{th}}\) standard basis vector. Note that \(a_{ij} = \inp{e_i}{e_j}\).\end{remark}
 
-\begin{theorem}The trace of \(\adj{A}A\) is equal to the square of the Hilbert-Schmidt norm of \(A\). \(\Tr( \adj{A} A ) = \norm{A}_2^2\)\end{theorem}
-\begin{proof} \begin{equation*} \begin{split} 
+\begin{theorem}The trace of \(\adj{A}A\) is equal to the square of the Hilbert-Schmidt norm of \(A\). \[\Tr( \adj{A} A ) = \norm{A}_2^2\]\end{theorem}
+\begin{proof}
+The sum of diagonal elements of \(\adj{A} A\) is
+ \begin{equation*} \begin{split} 
 \Tr(\adj{A} A) & = \sum_{i=1}^n \inp{\adj{A}A e_i}{e_i} \\
 & = \sum_{i=1} ^n \inp{Ae_i}{Ae_i} \\
 & = \sum_{i=1} ^n \norm{Ae_i}^2 \\
@@ -223,43 +242,76 @@ The trace of matrix \(A\) is the sum of the diagonal elements of the matrix.
  \end{proof}
 
 \subsection{Hermitian Matrix}
-A matrix that satisfies \(A = \adj{A}\) is called a Hermitian matrix (also known as self-adjoint matrix). 
+A matrix that satisfies \(A = \adj{A}\) is called a Hermitian matrix (or a self-adjoint matrix). 
 
-\begin{theorem} \label{herm_eig_real} All eigenvalues of a Hermitian matrix are real. \end{theorem}
+\begin{theorem} \label{herm_eig_real} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix. Then all eigenvalues of \(A\) are real. \end{theorem}
 
 \begin{proof}
 %format equations
-Let \(v\) be an eigenvector of a Hermitian matrix \(A\), and let \(\lambda\) be the corresponding eigenvalue. Then \(Av = \lambda v\). 
+Let \(v\) be an eigenvector of a matrix \(A\), and let \(\lambda\) be the corresponding eigenvalue. Then \(Av = \lambda v\). 
 
-\(\inp{Av}{v} = \inp{\lambda v}{v} = \lambda\inp{v}{v}\). Also \(\inp{Av}{v} = \inp{v}{\adj{A}v} = \inp{v}{Av} = \inp{v}{\lambda v} = \conj{\lambda} \inp{v}{v}\)
+\[ \lambda\inp{v}{v} = \inp{\lambda v}{v} =  \inp{Av}{v} = \inp{v}{\adj{A}v} = \inp{v}{Av} = \inp{v}{\lambda v} = \conj{\lambda} \inp{v}{v}\]
 
-This means \(\lambda \inp{v}{v} = \conj{\lambda} \inp{v}{v}\) for any \(v\). Since \(\lambda\) is the same conjugate as its complex conjugate, it implies \(\lambda\) is real. 
+This implies \(\lambda = \conj{\lambda}\) for all \(v\). Hence, \(\lambda\) is real. All eigenvalues of a Hermitian matrix are real.
  \end{proof}
 
 
-The converse of this is also true. 
-\begin{theorem}\label{eig_real_herm}  [Converse of Theorem \ref{herm_eig_real}]  If \(A \in \mathbb{M}_n\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x\), then \(A = \adj{A}\). \end{theorem}
+
+\begin{theorem} Eigenvectors corresponding to distinct eigenvalues are orthogonal.\end{theorem}
+
+\begin{proof} Suppose \(\lambda\) and \(\mu\) are distinct eigenvalues of \(A\). Suppose the corresponding eigenvectors are \(u\) and \(v\) respectively. We have \(Au = \lambda u\) and \(Av = \mu v\). Since \(A\) is Hermitian, 
+
+\[ \lambda \inp{u}{v} = \inp{\lambda u}{v} = \inp{A u}{v} = \inp{u}{Av} = \inp{u}{\mu v} = \mu \inp{u}{v} \]
+
+Since \(\lambda \ne \mu\), \(\inp{u}{v}\) must be zero. Eigenvectors \(u\) and \(v\) are orthogonal.
+
+\end{proof}
+
+
+
+A diagonal matrix is a matrix whose non-diagonal entries are all zero. \(a_{ij} = 0\) if \(i \ne j\)
+
+\begin{theorem}[Spectral theorem]  For every Hermitian matrix \(A\), there exists a unitary matrix \(U\) such that \( \adj{U} A  U\) is a diagonal matrix. \end{theorem}
+
+\begin{proof} 
+The matrix \(U\) is a unitary matrix, which means \(\adj{U} U = I\)
+
+
+
+Start with any eigenvalue \(\lambda_i\) of \(A\). Let \(x_i\) be a unit eigenvector corresponding to \(\lambda_i\).
+
+Let \(\mathcal{M} = \{y \in \mathbb{C}^n, \ \inp{y}{x} = 0\}\)
+
+\(\inp{Ay}{x} = \inp{y}{Ax} = \lambda \inp{y}{x} = 0\).
+
+% finish the proof
+\end{proof}
+
+
+
+\begin{theorem}\label{eig_real_herm} If \(A \in \mathbb{M}_n\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x \in \mathbb{C}_n\), then \(A\) is a Hermitian matrix. \end{theorem}
 
 \begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then
-\(\inp{A(h + \alpha g)}{h + \alpha g} = \inp{Ah}{h} + \alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} + \abs{\alpha}^2 \inp{Ag}{g} \)
+\[\inp{A(h + \alpha g)}{h + \alpha g} = \inp{Ah}{h} + \alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} + \abs{\alpha}^2 \inp{Ag}{g} \]
 
-So \(\alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} = \conj{\alpha} \inp{h}{Ag} + \alpha \inp{g}{Ah} \)
-When \(\alpha = 1\), \(\inp{Ag}{h} + \inp{Ah}{g} = \inp{h}{Ag} + \inp{g}{Ah}\)\
+The first and the last terms \(\inp{Ah}{h}\) and \(\abs{\alpha}^2 \inp{Ag}{g}\) are both real. We now look at the sum of second and third terms:
+\[\alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} = \conj{\alpha} \inp{h}{Ag} + \alpha \inp{g}{Ah} \]
 
-When \(\alpha = i\), \(i \inp{Ag}{h} - i \inp{Ah}{g} = -i \inp{h}{Ag} + i \inp{g}{Ah}\)
+We can substitute values of \(\alpha = 1\) and \(\alpha = i\)  in this equation to get a system of linear equations. 
+\begin{equation*}
+\begin{aligned}
+\inp{Ag}{h}  + \inp{Ah}{g} & =  \inp{h}{Ag}  + \inp{g}{Ah} \\
+i \inp{Ag}{h}  - i \inp{Ah}{g}  & = -i \inp{h}{Ag} +  i \inp{g}{Ah} 
+\end{aligned}
+\end{equation*}
 
-\(2i \inp{Ag}{h} = 2i \inp{g}{Ah}\) or \(\inp{Ag}{h} = \inp{g}{Ah} = \inp{\adj{A}g}{h}\)
-
-\(Ag = \adj{A}g\) for all \(g\), therefore \(A = \adj{A}\). \(A\) is Hermitian.
- \end{proof}
+Solving this system gives us \(\inp{Ag}{h} = \inp{g}{Ah}\), which is equal to \(\inp{\adj{A}g}{h}\). Hence \(Ag = \adj{A}g\) for all \(g\), and \(A = \adj{A}\). We see that \(A\) is a Hermitian matrix.
+\end{proof}
 
 \begin{corollary}Every positive semidefinite matrix \(A \in \mathbb{M}_n\) is Hermitian.\end{corollary}
-\begin{proof} \(\inp{Ax}{x} \ge 0 \)  so \(\inp{Ax}{x} \in \mathbb{R}\) for all \(x\). By Theorem \ref{eig_real_herm}, \(A\) is Hermitian. \end{proof}
+\begin{proof} \(A\) is a positive semidefinite matrix, so \(\inp{Ax}{x} \ge 0 \),  so \(\inp{Ax}{x} \in \mathbb{R}\) for all \(x\). By Theorem \ref{eig_real_herm}, \(A\) is Hermitian. \end{proof}
 
-
-
-
-\begin{lemma} If \(A\) is Hermitian, then \(\norm{A} = \sup_{\norm{h} = 1} \abs{\inp{Ah}{h}}\).\end{lemma}
+\begin{lemma} If \(A\) is Hermitian, then \(\norm{A} =\displaystyle \sup_{\norm{h} = 1} \abs{\inp{Ah}{h}}\).\end{lemma}
 \begin{proof} Let \(x \in \mathbb{C}^n\). Then for any \(g \in \mathbb{C}^n\), we have \(\abs{\inp{x}{g}} \le \norm{x} \norm{g}\). (By Cauchy-Schwartz).
 
 So \(\abs{\inp{x}{\frac{g}{\norm{g}}}} \le \norm{x}\) 
@@ -276,35 +328,25 @@ If \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g}\), then
 \inp{A (h \pm g)}{h\pm g} & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{Ag}{h} + \inp{Ag}{g} \\
 & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{g}{Ah} + \inp{Ag}{g} \\
 & = \inp{Ah}{h} \pm 2 \text{Re}(\inp{Ah}{g}) + \inp{Ag}{g} \\ \\
-4 \text{Re}\inp{Ah}{g} = 
-%complete this proof
+4 \text{Re}\inp{Ah}{g} &= \inp{A(h+g)}{h+g} - \inp{A(h-g)}{h-g} \\
+& \le \abs{\inp{A(h+g)}{h+g}} + \abs{\inp{A(h-g)}{h-g}} \\
+& \le M (\norm{h + g}^2 - \norm{h-g}^2) \\
+& = 2M (\norm{h}^2 + \norm{g}^2 \\
+& = 4M (\norm{h} = \norm{g} = 1) 
 \end{split} \end{equation*}
+
+\(\text{Re} \inp{Ah}{g} \le M\) for any \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g} = 1\). 
+
+Now \(\inp{Ah}{g} = e^{i \theta} \abs{\inp{Ah}{g}}\), so \(\inp{A e^{- i\theta}}{g} = e^{-i \theta} \inp{Ah}{g} = \abs{\inp{Ah}{g}}\).
+
+So \(\inp{Ae^{-i\theta}}{g} =  \text{Re} \inp{Ae^{-i\theta}}{g} \le M\)
+
+\(\abs{\inp{Ah}{g}} \le M\) for any \(\norm{h} = \norm{g} = 1\).
 \end{proof}
 
 
 \begin{lemma} If \(\inp{Ah}{h} = 0\) for all \(h\), then \(A = 0\).\end{lemma}
 \begin{proof} Left to the reader \end{proof}
-
-
-\subsection{Diagonalization}
-
-Hermitian matrices can be diagonalized?
-
-\begin{theorem}  For every Hermitian matrix \(A\), there exists a diagonal matrix \(\Lambda\) such that \(A = \adj{U}  \Lambda U\). Here \(U\) is some unitary matrix. \end{theorem}
-
-\begin{proof} 
-The matrix \(U\) is a unitary matrix, which means \(\adj{U} U = I\)
-
-
-
-Start with any eigenvalue \(\lambda_i\) of \(A\). Let \(x_i\) be a unit eigenvector corresponding to \(\lambda_i\).
-
-Let \(\mathcal{M} = \{y \in \mathbb{C}^n, \ \inp{y}{x} = 0\}\)
-
-\(\inp{Ay}{x} = \inp{y}{Ax} = \lambda \inp{y}{x} = 0\).
-
-% finish the proof
-\end{proof}
 \subsection{Projectors}
 A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
 
@@ -320,34 +362,32 @@ Let \(S\), the {\em shift matrix},  be the \(n \times n\) square matrix \( \begi
 0 & 0 & 0 & \cdots & 0 \\ 
 \end{bmatrix}\). 
 
- Note that \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix.
+ \begin{remark} \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix. \end{remark}
+
+\begin{remark} \(\norm{S} < 1\) \end{remark}
 
 Related useful matrices: 
-
-\(\adj{S} =  \begin{bmatrix} 
+\[\adj{S} =  \begin{bmatrix} 
 0 & 0 & \cdots & 0 & 0 \\
 1 & 0 & \cdots & 0 & 0 \\
 0 & 1 & \cdots & 0 & 0 \\
 \vdots & \vdots & \ddots &\vdots & \vdots \\
 0 & 0 & \cdots & 1 & 0 \\ 
-\end{bmatrix}\). 
-
- \(\adj{S} S  =  \begin{bmatrix} 
-0 & 0 & 0 & \cdots & 0 & 0 \\
-0 & 1 & 0 & \cdots & 0 & 0 \\
-0 & 0 & 1 & \cdots & 0 & 0 \\
-\vdots & \vdots & \vdots & \ddots &\vdots & \vdots \\
-0 & 0 & 0 & \cdots & 1 & 0 \\ 
-0 & 0 & 0 & \cdots & 0 & 1
-\end{bmatrix}\). 
-
- \(I - S \adj{S} =  \begin{bmatrix} 
+\end{bmatrix}, \quad 
+\adj{S} S  =  \begin{bmatrix} 
+0 & 0 & 0 & \cdots & 0 \\
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1
+\end{bmatrix}, \quad 
+ I - S \adj{S} =  \begin{bmatrix} 
 1 & 0 & \cdots & 0 & 0 \\
 0 & 0 & \cdots & 0 & 0 \\
 \vdots & \vdots & \ddots &\vdots & \vdots \\
 0 & 0 & \cdots & 0 & 0 \\ 
 0 & 0 & \cdots & 0 & 0
-\end{bmatrix}\). 
+\end{bmatrix}\]
 
 The last one \(I - \adj{S} S\) is a projector. 
 
@@ -376,13 +416,11 @@ Next, define \(q\) as the polynomial \(\conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \
 
 
 Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
-
-\(= \inp{q(S)x}{q(S)x} - \inp{p(S)x}{p(S)x}\)
-
-\(= \inp{\adj{q}(S) q(S) x}{x} - \inp{\adj{p}(S) p(S) x}{x}\)
-
-\(= \inp{(\adj{q}(S) q(S) - \adj{p} (S) p(S) ) x}{x}\).
-
+\begin{equation*} \begin{split}
+\norm{ q(S) x }^2 - \norm{ p(S) x}^2 &= \inp{q(S)x}{q(S)x} - \inp{p(S)x}{p(S)} \\
+& = \inp{\adj{q}(S) q(S) x}{x} - \inp{\adj{p}(S) p(S) x}{x} \\
+& = \inp{(\adj{q}(S) q(S) - \adj{p} (S) p(S) ) x}{x} \\
+\end{split} \end{equation*}
 The \(n \times n\) matrix corresponding to this Hermitian form is  \(H = \adj{q}(S) q(S) - \adj{p}(S) p(S)\).
 
 
@@ -390,7 +428,7 @@ We can now state the Schur-Cohn theorem:
 
 \begin{theorem}The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
-\section{Proof}
+\subsection{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
 We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees with the help of the Spectral theorem and the Courant-Fischer theorem. 
@@ -420,11 +458,6 @@ For \(n = 1\), \(I - \adj{S}S\) is just a \(1 \times 1\) matrix, so \(H = (1 - \
 
 Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 1\), then root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
 
-\subsection{Spectral theorem}
-
-\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then \(A\) can be written as \(U \Lambda \adj{U} \), where \(U\) is a unitary matrix, and \(\Lambda\) is a diagonal matrix with real entries. \end{theorem}
-
-\begin{proof} Left to the reader. \end{proof}
 
 \subsection{Courant-Fischer theorem}
 
