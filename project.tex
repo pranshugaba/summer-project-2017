@@ -51,7 +51,7 @@
 \newcommand*\abs[1]{\left \vert #1 \right\vert}
 \newcommand*\trp[1]{#1^T}
 \DeclareMathOperator{\Tr}{Tr}
-\DeclarePairedDelimiterX{\inp}[2]{\langle}{\rangle}{#1, #2}
+\DeclarePairedDelimiterX{\inp}[2]{\langle }{\rangle }{#1, #2}
 
 
 \theoremstyle{plain}
@@ -107,6 +107,15 @@ Given \(A \in \mathbb{M}_n\) (the set of \(n \times n\) square matrices with com
 \norm{A + B}  = \sup _{x \ne 0} \frac{\norm{(A + B) x}}{\norm{x}} & \le \sup_{x \ne 0} \frac{\norm{Ax} +\norm{Bx}}{\norm{x}} \\
 & \le \sup_{x \ne 0} \frac{\norm{Ax}}{\norm{x}} + \sup_{x \ne 0} \frac{\norm{Bx}}{\norm{x}} = \norm{A} + \norm{B}
 \end{split} \end{equation*} \end{proof}
+
+\begin{theorem}\label{submulti} The operator norm is submultiplicative,  \(\norm{AB} \le \norm{A} \norm{B}\) for all square matrices \(A, B \in \mathbb{M}_n\). \end{theorem}
+\begin{proof} \begin{equation*} \begin{split}
+ \norm{AB} & = \sup_{x \ne 0} \frac{\norm{ABx}}{\norm{x}}\\
+ & = \sup_{Bx \ne 0} \frac{\norm{ABx}}{\norm{x}} \\
+& = \sup_{Bx \ne 0} \frac{\norm{ABx}}{\norm{Bx}} \frac{\norm{Bx}}{\norm{x}} \\
+& \le \sup_{y \ne 0} \frac{\norm{Ay}}{\norm{y}} \sup_{x \ne 0} \frac{\norm{Bx}}{\norm{x}} = \norm{A} \norm{B} 
+\end{split} \end{equation*}\end{proof}
+
 \subsubsection{Hilbert-Schmidt norm}
 
 The Hilbert-Schmidt norm of matrix \(A\), denoted by \(\norm{A}_2\),  is defined as the square root of sum of squares of all entries in \(A\). 
@@ -115,7 +124,6 @@ The Hilbert-Schmidt norm of matrix \(A\), denoted by \(\norm{A}_2\),  is defined
 
 
 \begin{theorem} The operator norm is always less than or equal to the Hilbert-Schmidt norm. \end{theorem}
-
 \begin{proof}
  \begin{equation*} \begin{split} 
 \norm{Ax}^2 & = \sum_{i = 1} ^ n \abs{\sum_{j = 1} ^ n a_{ij} x_j}^2 \\
@@ -123,10 +131,8 @@ The Hilbert-Schmidt norm of matrix \(A\), denoted by \(\norm{A}_2\),  is defined
 & \le \left( \sum_{i = 1}^n \sum_{j = 1}^n \abs{a_{ij}}^2\right) \left( \sum_{j=1}^n \abs{x_j}^2 \right)  = \left( \sum_{i, j} \abs{a_{ij}}^2 \right) \norm{x}^2
 \end{split}
 \end{equation*} 
-
 Therefore \(\displaystyle \frac{\norm{Ax}}{\norm{x}} \le \left( \sum_{i, j} \abs{a_{ij}}^2 \right) ^{1/2}\), which is equivalent to \(\norm{A} \le \norm{A}_2\).
 \end{proof}
-
 
 
 \subsection{Inner product}
@@ -151,6 +157,24 @@ The inner product is a binary operator on two vectors \(\inp{\cdot}{\cdot} \colo
 
 For vectors on \(\mathbb{C}^n\), the inner product \(\inp{x}{y}\) is defined as \(\trp{x} \conj{y}\), the vector multiplication of the transpose of the first term with the complex conjugate of the second term. This definition satisfies all the above mentioned conditions.
 
+\subsection{Positive Definite Matrix}
+
+A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x \in \mathbb{C}^n\) is called a {\em positive semidefinite matrix} and is denoted as \(A \ge 0\). If the inequality is strict, \(\inp{Ax}{x} > 0\), then \(A\) is called a {\em positive definite matrix}, and it is denoted as \(A > 0\). 
+
+For two matrices \(A, B \in \mathbb{M}_n\), \(A \le B\) denotes \(B - A\) is positive semidefinite. As a result, \(\inp{(B - A)x}{x} \ge 0\), or \(\inp{Ax}{x} \le \inp{Bx}{x}\) for all \(x\).
+
+\begin{theorem} Let \(A \in \mathbb{M}_n\) be a positive semidefinite matrix. Then all eigenvalues of \(A\) are non-negative. \end{theorem}
+\begin{proof} Let \(\lambda_1, \lambda_2, \ldots , \lambda_n\) be the eigenvalues of \(A\), and let \(x_1, x_2, \ldots , x_n\) be the corresponding eigenvectors, that is: \(Ax_i = \lambda x_i\). 
+
+ For any eigenvector \(x_i\), the inner product \(\inp{Ax_i}{x_i} = \inp{\lambda_i x_i}{x_i}\). Since \(\lambda_i\) is a scalar, it can come out of the inner product, so  \( \inp{\lambda_i x_i}{x_i}  = \lambda_i \inp{x_i}{x_i}\). We get
+
+\[\lambda_i = \frac{\inp{Ax_i}{x_i}}{\inp{x_i}{x_i}}\]
+
+Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\); all eigenvalues of \(A\) are non-negative. \end{proof}
+
+\begin{theorem}\label{pdm} \(\adj{A} A\) and \(A \adj{A}\) are positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
+\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
+
 
 \subsection{Adjoint}
 
@@ -170,33 +194,18 @@ Therefore \(\trp{(\adj{A})} = \conj{A}\), or \(\adj{A} = \trp{(\conj{A})}\). \en
 \begin{remark} The adjoint of the adjoint of a matrix is the original matrix itself, \(\adj{(\adj{A})} = A\). \end{remark}
 
 
-\begin{theorem} \(\norm{A} = \norm{\adj{A}}\) \end{theorem}
-\begin{proof} Left to the reader. \end{proof}
-
-\subsection{Positive Definite Matrix}
-
-A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x \in \mathbb{C}^n\) is called a {\em positive semidefinite matrix} and is denoted as \(A \ge 0\). If the inequality is strict, \(\inp{Ax}{x} > 0\), then \(A\) is called a {\em positive definite matrix}, and it is denoted as \(A > 0\). 
-
-\begin{theorem} Let \(A \in \mathbb{M}_n\) be a positive semidefinite matrix. Then all eigenvalues of \(A\) are non-negative. \end{theorem}
-\begin{proof} Let \(\lambda_1, \lambda_2, \ldots , \lambda_n\) be the eigenvalues of \(A\), and let \(x_1, x_2, \ldots , x_n\) be the corresponding eigenvectors, that is: \(Ax_i = \lambda x_i\). 
-
- For any eigenvector \(x_i\), the inner product \(\inp{Ax_i}{x_i} = \inp{\lambda_i x_i}{x_i}\). Since \(\lambda_i\) is a scalar, it can come out of the inner product, so  \( \inp{\lambda_i x_i}{x_i}  = \lambda_i \inp{x_i}{x_i}\). We get
-
-\[\lambda_i = \frac{\inp{Ax_i}{x_i}}{\inp{x_i}{x_i}}\]
-
-Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\); all eigenvalues of \(A\) are non-negative. \end{proof}
 
 
-\begin{theorem} \(\adj{A} A\) is a positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
-\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
+\begin{theorem} The norm of a matrix is equal to the norm of its adjoint. \(\norm{A} = \norm{\adj{A}}\) \end{theorem}
+\begin{proof}
+\[ \norm{A}^2   = \sup_{\norm{x} = 1} \norm{Ax}^2  = \sup_{\norm{x} = 1} \inp{Ax}{Ax}  = \sup_{\norm{x} = 1} \inp{\adj{A} A x}{x}  = \norm{\adj{A} A} \]
 
-%format this better 
-\begin{theorem} If \(A \le B\), (that is \(B - A\) is positive semidefinite), then \(\inp{Ax}{x} \le \inp{Bx}{x}\) for all \(x\). \end{theorem}
-\begin{proof} \(B - A\) is positive semidefinite, so \(\inp{(B - A) x}{x} \ge 0\)
+\[ \norm{\adj{A}}^2   = \sup_{\norm{x} = 1} \norm{\adj{A} x}^2  = \sup_{\norm{x} = 1} \inp{\adj{A}x}{\adj{A}x}  = \sup_{\norm{x} = 1} \inp{A \adj{A} x}{x}  = \norm{A \adj{A}} \le \norm{A} \norm{\adj{A}}\]
 
-\(\inp{Bx}{x} - \inp{Ax}{x} \ge 0\)
+However, from Theorem \ref{submulti}, we get  \(\norm{\adj{A} A} \le \norm{\adj{A}} \norm{A}\). Hence, \(\norm{A}^2 \le \norm{\adj{A}} \norm{A}\), which implies  \(\norm{A} \le \norm{\adj{A}}\). Similarly, in the second equation we get \(\norm{\adj{A}} \le \norm{A}\). 
 
-\(\inp{Ax}{x} \le \inp{Bx}{x} \le 0\) \end{proof}
+Since both these inequalities are true, it necessarily means that \(\norm{A} = \norm{\adj{A}}\).
+\end{proof}
 
 
 \subsection{Unitary Matrices}
@@ -294,12 +303,12 @@ Let \(\mathcal{M} = \{y \in \mathbb{C}^n, \ \inp{y}{x} = 0\}\)
 % finish the proof
 \end{proof}
 
-\begin{theorem} If \(A \in \mathbb{M}_n\) is Hermitian, then \(\inp{Ax}{x}\) is real for all \(x\). \end{theorem}
+\begin{theorem} \label{hermit_real} If \(A \in \mathbb{M}_n\) is Hermitian, then \(\inp{Ax}{x}\) is real for all \(x\). \end{theorem}
 \begin{proof} \(\inp{Ax}{x} = \inp{x}{\adj{A}x} = \inp{x}{Ax} = \conj{\inp{Ax}{x}}\). \end{proof}
 
 The converse of this theorem is also true.
 
-\begin{theorem}\label{eig_real_herm} If \(A \in \mathbb{M}_n\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x \in \mathbb{C}_n\), then \(A\) is a Hermitian matrix. \end{theorem}
+\begin{theorem}[Converse of Theorem \ref{hermit_real}]\label{eig_real_herm} If \(A \in \mathbb{M}_n\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x \in \mathbb{C}_n\), then \(A\) is a Hermitian matrix. \end{theorem}
 
 \begin{proof} Let \(\alpha \in \mathbb{C}\) and \(h, g \in \mathbb{C}^n\). Then
 \[\inp{A(h + \alpha g)}{h + \alpha g} = \inp{Ah}{h} + \alpha \inp{Ag}{h} + \conj{\alpha} \inp{Ah}{g} + \abs{\alpha}^2 \inp{Ag}{g} \]
@@ -321,73 +330,76 @@ Solving this system gives us \(\inp{Ag}{h} = \inp{g}{Ah}\), which is equal to \(
 \begin{corollary}Every positive semidefinite matrix \(A \in \mathbb{M}_n\) is Hermitian.\end{corollary}
 \begin{proof} \(A\) is a positive semidefinite matrix, so \(\inp{Ax}{x} \ge 0 \),  so \(\inp{Ax}{x} \in \mathbb{R}\) for all \(x\). By Theorem \ref{eig_real_herm}, \(A\) is Hermitian. \end{proof}
 
-\begin{theorem}\label{norm_herm} If \(A\) is Hermitian, then \(\norm{A} =\displaystyle \sup_{\norm{h} = 1} \abs{\inp{Ah}{h}}\).\end{theorem}
-\begin{proof} Let \(x \in \mathbb{C}^n\). Then for any \(g \in \mathbb{C}^n\), we have \(\abs{\inp{x}{g}} \le \norm{x} \norm{g}\). (By Cauchy-Schwartz).
+\begin{theorem}\label{norm_herm} If \(A\) is Hermitian, then \(\norm{A} = \sup\{\abs{\inp{Ah}{h}} : \norm{h} = 1\}\).\end{theorem}
+\begin{proof} By Cauchy Schwarz, \(\norm{Ah}\norm{h} \ge \abs{\inp{Ah}{h}}\). For \(\norm{h} =1\), we have  \(\norm{A} \ge \abs{\inp{Ah}{h}}\). Now we will prove the reverse inequality. 
 
-So \(\abs{\inp{x}{\frac{g}{\norm{g}}}} \le \norm{x}\) 
-
-So \(\sup_{\norm{g} = 1} \abs{\inp{x}{g}} \le \norm{x} \) (Equality when \(g = \frac{x}{\norm{x}})\).
-
-\(\norm{A} = \sup_{\norm{h} = 1} \norm{Ah}\)
-
-\(= \sup_{\norm{h} = 1} \sup_{\norm{g}=1} \abs{\inp{Ah}{g}}  \)
-
-If \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g}\), then
+Let \(M = \sup \{\abs{\inp{Ah}{h}} : \norm{h} = 1 \}\). If \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g} = 1\), then
 
 \begin{equation*} \begin{split}
 \inp{A (h \pm g)}{h\pm g} & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{Ag}{h} + \inp{Ag}{g} \\
 & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{g}{Ah} + \inp{Ag}{g} \\
-& = \inp{Ah}{h} \pm 2 \text{Re}(\inp{Ah}{g}) + \inp{Ag}{g} \\ \\
-4 \text{Re}\inp{Ah}{g} &= \inp{A(h+g)}{h+g} - \inp{A(h-g)}{h-g} \\
-& \le \abs{\inp{A(h+g)}{h+g}} + \abs{\inp{A(h-g)}{h-g}} \\
-& \le M (\norm{h + g}^2 - \norm{h-g}^2) \\
-& = 2M (\norm{h}^2 + \norm{g}^2 \\
-& = 4M (\norm{h} = \norm{g} = 1) 
+& = \inp{Ah}{h} \pm 2 \text{Re}(\inp{Ah}{g}) + \inp{Ag}{g} \\
 \end{split} \end{equation*}
 
-\(\text{Re} \inp{Ah}{g} \le M\) for any \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g} = 1\). 
+Using this, we get 
+\begin{equation*} \begin{split}
+4\mathrm{Re} \inp{Ah}{g} &= \inp{A(h+g)}{h+g} - \inp{A(h-g)}{h-g} \\
+& \le \abs{\inp{A(h+g)}{h+g}} + \abs{\inp{A(h-g)}{h-g}} \\
+& \le \abs{\inp{A \frac{h+g}{\norm{h+g}}}{\frac{h+g}{\norm{h+g}}}} \norm{h + g}^2 + \abs{\inp{A \frac{h-g}{\norm{h-g}}}{\frac{h-g}{\norm{h-g}}}} \norm{h - g}^2\\
+& \le M (\norm{h + g}^2 + \norm{h-g}^2) \\
+& = M (2 \norm{h}^2 + 2 \norm{g}^2) = 4M 
+\end{split} \end{equation*}
 
-Now \(\inp{Ah}{g} = e^{i \theta} \abs{\inp{Ah}{g}}\), so \(\inp{A e^{- i\theta}}{g} = e^{-i \theta} \inp{Ah}{g} = \abs{\inp{Ah}{g}}\).
 
-So \(\inp{Ae^{-i\theta}}{g} =  \text{Re} \inp{Ae^{-i\theta}}{g} \le M\)
+We get \(\text{Re} \inp{Ah}{g} \le M\) for any \(h, g \in \mathbb{C}^n\) with \(\norm{h} = \norm{g} = 1\). 
 
-\(\abs{\inp{Ah}{g}} \le M\) for any \(\norm{h} = \norm{g} = 1\).
+If \(\inp{Ah}{g}\) is not real, then we can write it as  \(\inp{Ah}{g} = e^{i \theta} \abs{\inp{Ah}{g}}\). We get \(\abs{\inp{Ah}{g}} = e^{-i \theta} \inp{Ah}{g}\) is real, and is equal to \(\inp{A e^{- i\theta}h}{g}\). Since \(\norm{e^{-i\theta} h}= 1\), the above inequality still holds:
+ \[\abs{\inp{Ah}{g}} = \inp{Ae^{-i\theta}h}{g} =  \text{Re} \inp{Ae^{-i\theta}h}{g} \le M\]
+
+We also have the following relation
+ \[\norm{A} = \sup_{\norm{h} =1} \norm{Ah} = \sup_{\norm{h = 1}} \sup_{\norm{g} = 1} \abs{\inp{Ah}{g}} \]
+
+Therefore \(\abs{\inp{Ah}{g}} \le M\)  implies \(\norm{A} \le M\). Since \(\norm{A} \ge M\) and \(\norm{A} \le M\) both hold true, it means that \(\norm{A} = M = \sup \{ \abs{\inp{Ah}{h}} : \norm{h} = 1 \}\).
+%\[\abs{\inp{Ah}{g}} = \]
 \end{proof}
-
 
 \begin{corollary} If \(\inp{Ax}{x} = 0\) for all \(x\), then \(A = 0\).\end{corollary}
 \begin{proof} Since \(\inp{Ax}{x} = 0\) for all \(x\), we have \(\sup \abs{\inp{Ax}{x}} = 0\). By Theorem \ref{norm_herm},\( \norm{A} = 0 \). This is true only when \(A = 0\).\end{proof}
 
 
 \begin{corollary} If \(A \ge 0\), then \(\displaystyle \norm{A} = \sup _{\norm{x} = 1} \inp{Ax}{x}\) \end{corollary}
-\begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
+\begin{proof}   By the Corollary in Theorem \ref{eig_real_herm}, every positive semidefinite matrix is Hermitian, and for a positive semidefinite matrix, \(\abs{\inp{Ax}{x}} = \inp{Ax}{x}\). Hence, \(\norm{A} = \displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x}\) \end{proof}
 
 
 
-\begin{theorem}[Courant-Fischer] Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then 
-  \[ \lambda_k = \min_{\omega_1, \ldots , \omega_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp \omega_1, \ldots , \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+\begin{theorem}[Courant-Fischer] Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Let \(w_1, w_2, w_3, \ldots , w_n\) denote the respective eigenvectors.  Then 
+  \[ \lambda_k = \min_{w_1, \ldots , w_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp w_1, \ldots , w_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
  \end{theorem}
 
 
-\begin{proof} If \(x \neq 0\), then \[\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} =  \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\] and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
+\begin{proof} 
+
+ If \(x \neq 0\), then \[\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} =  \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\]
+
+Since \(U\) is a unitary matrix, its columns form an orthonormal basis.  \(\adj{U}x\) spans and \( \{ \adj{U} x \mid x \neq 0\}  = \{x \in \mathbb{C}^n \mid x \ne 0 \}\) 
 
 
 
-Thus if \(\omega_1, \ldots , \omega_{n-k}\) are given, then 
+Thus if \(w_1, \ldots , w_{n-k}\) are given, then 
 
 \begin{equation*} \begin{split}
-\sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} & = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} \\
-%\textrm{x \perp \omega if and only if y \perp \adj{U} \omega.} \\
-&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i} \\
-&  \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2 \\
-&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2 \\
+\sup_{\substack{x \neq 0 \\ x \perp w_1, \ldots, \ w_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} & = \sup_{\substack{y \neq 0 \\ y \perp \adj{U} w_1, \ldots ,\ \adj{U} w_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} \\
+%\textrm{x \perp w if and only if y \perp \adj{U} \omega.} \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} w_1, \ \ldots , \ \adj{U}w_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i}^2 \\
+&  \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} w_1, \ \ldots , \ \adj{U} w_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2 \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} w_1, \ \ldots , \ \adj{U} w_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2 \\
 &  \ge \lambda_k 
 \end{split} \end{equation*}
 
 
-Let \(\omega_1 = x_n , \ \omega_2 = x_{n-1}, \ \ldots , \ \omega_{n-k} = x_{k + 1}\)
+Let \(w_1 = x_n , \ w_2 = x_{n-1}, \ \ldots , \ w_{n-k} = x_{k + 1}\)
 
-If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
+If \(x\perp w_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
 
 \begin{equation*} \begin{split}
 \inp{Ax}{x} & = \inp{A \sum_{i = 1} ^ n c_i x_i}{ \sum_{i = 1} ^n c_i x_i} \\
@@ -408,10 +420,12 @@ Pm = m & \forall m \in M \\
 Px = 0 & \forall x \in M^\perp 
 \end{cases}\] 
 \end{theorem}
-\begin{proof} Let \(m \in \mathrm{range}(P)\), that is, \(m= Pv\) for some \(v\). Then \(Pm = P^2 v = Pv = m\). 
-\(Pm - m\) belongs to the null space of \(P\)
-\(P(Pm -m) = P^2m - Pm = Pm - Pm = 0\)  
-\(\mathrm{null}(P)\) is orthogonal to the \(\mathrm{range}(P)\)
+\begin{proof}  \(\mathrm{range}(P)= M\) and \(\mathrm{range}(I - P) = M^\perp\) satisfy the above properties. These subspaces are orthogonal. Let \(Pv \in M\), \(w - Pw \in M^\perp\). 
+\[\inp{w - Pw}{Pv} = \inp{w}{Pv} - \inp{Pw}{Pv} = \inp{w}{Pv} - \inp{w}{\adj{P}Pv} = \inp{w}{Pv} - \inp{w}{P^2v} = \inp{w}{Pv} - \inp{w}{Pv} = 0\]
+
+Let \(m \in \mathrm{range}(P)\), that is, \(m= Pv\) for some \(v \in \mathbb{C}^n\). Then \(Pm = P^2 v = Pv = m\). 
+
+Now let \(x \in \mathrm{range}(I - P)\), that is, \(x = (I - P) = v - Pv\) for some \(v \in \mathbb{C}^n\). \(Px = Pv - P^2v = Pv - Pv = 0\).
 %frame the arguments better
  \end{proof}
 
@@ -426,7 +440,7 @@ Let \(S\), the {\em shift matrix},  be the \(n \times n\) square matrix \( \begi
 
  \begin{remark} \(S\) is a nilpotent matrix of order \(n\), i.e. \(S^n\) is a zero matrix. \end{remark}
 
-\begin{remark} \(\norm{S} < 1\) \end{remark}
+% \begin{remark} \(\norm{S} < 1\) \end{remark}
 
 Related useful matrices: 
 \[\adj{S} =  \begin{bmatrix} 
@@ -461,7 +475,7 @@ Given any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + a_2 z^{n-2} + \cdots +  a_{
 
  Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
 
- Then \(p(S) \) is \( \begin{bmatrix} 
+Note that \(p(S) \) is \( \begin{bmatrix} 
 
 % replace zeroes with dots
 a_n & a_{n-1} & a_{n-2} & \cdots & a_1 \\
@@ -469,25 +483,29 @@ a_n & a_{n-1} & a_{n-2} & \cdots & a_1 \\
 0 & 0 & a_n & \cdots & a_3 \\
 \vdots & \vdots & \ddots &\ddots & \vdots \\
 0 & 0 & \cdots & 0 & a_n \\ 
-\end{bmatrix}\). 
+\end{bmatrix}\), where \(S\) is the shift matrix. 
 
 
-This can be factorized as \[p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\] Let \(B_j = S - \alpha_jI\). Then \(p(S) =\displaystyle \prod_{j=1}^n B_j\)
+The matrix \(p(S)\) can be factorized as \[p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\]
+
+Denote \(S - \alpha_jI\) by \(B_j\). Then \(p(S) =\displaystyle \prod_{j=1}^n B_j = B_1 B_2 B_3 \cdots B_n\)
 
 Next, define \(q\) to be the polynomial 
 \[q(z) = \conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\] 
 
-Note that its roots are \(\frac {1}{\conj{\alpha_i}}\). 
+The roots of \(q(S)\) are \(\frac {1}{\conj{\alpha_i}}\). 
 \begin{equation*}\begin{split}
 q \left(\frac{1}{\conj{\alpha_i}} \right) & = \frac{\conj{a_n}}{\conj{\alpha_i}^n} + \frac{\conj{a_{n-1}}}{\conj{\alpha_i}^{n-1}} + \cdots + \conj{a_0} \\
 & = \frac{1}{\conj{\alpha_i}^n} (\conj{a_n} + \conj{a_{n-1}} \conj{\alpha_i} + \cdots + \conj{a_0} \conj{\alpha_i}^n) \\
 & = \frac{\conj{p(\alpha_i)}}{\conj{\alpha_i}^n} = 0
 \end{split}\end{equation*}
 
-We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_n}z)\). Then \(q(S)\) can be factorized as
+\(q(z)\) can be factorized as \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_n}z)\). 
+
+The matrix \(q(S)\) can be factorized as
 \[q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\]
 
- Let \(C_j= I -  \conj{\alpha_j} S\). Then \(q(S) =\displaystyle \prod_{j=1}^n C_j\).
+ Denote \( I -  \conj{\alpha_j} S\) by \(C_j\). Then \(q(S) =\displaystyle \prod_{j=1}^n C_j = C_1 C_2 C_3 \cdots C_n\).
 
 
 Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
@@ -501,12 +519,12 @@ The \(n \times n\) matrix corresponding to this Hermitian form is  \(H = \adj{q}
 
 We now state the Schur-Cohn theorem:
 
-\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle \(|z| = 1\), and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
+\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle \(|z| = 1\), and \(n-k\) roots outside the circle if and only if \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \subsection{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
-We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees with the help of the Spectral theorem and the Courant-Fischer theorem. 
+We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees.
 
 
 Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. 
@@ -592,15 +610,15 @@ Converse: Let \(H\) be positive definite
 
 Let the eigenvalues of \(H\) be \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_k \le \cdots \le \lambda_n\).
 
-Let \(\lambda > 0\). Then given any \(\omega_1, \omega_2, \ldots , \omega_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x \perp \omega_1, \omega_2 , \ldots , \omega_{n-k}\) and \(\inp{Dx}{x} > 0\).
+Let \(\lambda_k > 0\). Then given any \(w_1, w_2, \ldots , w_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x \perp w_1, w_2 , \ldots , w_{n-k}\) and \(\inp{Dx}{x} > 0\).
 
 \[\inp{Hx}{x} = \inp{VD\adj{V} x}{x} = \inp{D\adj{V} x}{\adj{V}x}\]
 
-Let \(\omega_1, \omega_2, \ldots , \omega_{n-k}\) be given. Let \(\inp{y}{\omega_i} = 0 \forall i\). Let \(x = \adj{V}y\). 
+Let \(w_1, w_2, \ldots , w_{n-k}\) be given. Let \(\inp{y}{w_i} = 0 \forall i\). Let \(x = \adj{V}y\). 
 
-\(\inp{(\adj{V})^{-1}x}{\omega_i} = 0\) or \( \inp{x}{V^{-1} \omega_i} = 0\).
+\(\inp{(\adj{V})^{-1}x}{w_i} = 0\) or \( \inp{x}{V^{-1} w_i} = 0\).
 
-\(x \perp\) to all of \(V^{-1}\omega_1,  V^{-1} \omega_2, \ldots , V^{-1} \omega_{n-k}\).
+\(x \perp\) to all of \(V^{-1}w_1,  V^{-1} w_2, \ldots , V^{-1} w_{n-k}\).
 
 So \(\inp{Dx}{x} > 0\) or \(\inp{V^{-1} H V^{*^{-1}} x}{x} > 0\) or \(\inp{Hy}{y} > 0\).
 \subsection{Example}
