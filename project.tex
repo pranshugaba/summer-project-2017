@@ -190,6 +190,15 @@ Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite
 \begin{theorem} \(\adj{A} A\) is a positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
 \begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
 
+%format this better 
+\begin{theorem} If \(A \le B\), (that is \(B - A\) is positive semidefinite), then \(\inp{Ax}{x} \le \inp{Bx}{x}\) for all \(x\). \end{theorem}
+\begin{proof} \(B - A\) is positive semidefinite, so \(\inp{(B - A) x}{x} \ge 0\)
+
+\(\inp{Bx}{x} - \inp{Ax}{x} \ge 0\)
+
+\(\inp{Ax}{x} \le \inp{Bx}{x} \le 0\) \end{proof}
+
+
 \subsection{Unitary Matrices}
 
 A square matrix \(U\) that satisfies \(\adj{U} U = I\) is called a unitary matrix.
@@ -233,10 +242,9 @@ The trace of matrix \(A\) is the sum of the diagonal elements of the matrix.
 The sum of diagonal elements of \(\adj{A} A\) is
  \begin{equation*} \begin{split} 
 \Tr(\adj{A} A) & = \sum_{i=1}^n \inp{\adj{A}A e_i}{e_i} \\
-& = \sum_{i=1} ^n \inp{Ae_i}{Ae_i} \\
+ & = \sum_{i=1} ^n \inp{Ae_i}{Ae_i} \\
 & = \sum_{i=1} ^n \norm{Ae_i}^2 \\
-& = \sum_{i=1} ^n \sum_{j=1} ^n \abs{a_{ji}}^2 \\
-& = \norm{A}^2_2
+& = \sum_{i=1} ^n \sum_{j=1} ^n \abs{a_{ji}}^2  = \norm{A}^2_2
 \end{split} \end{equation*}
  \end{proof}
 
@@ -354,11 +362,53 @@ So \(\inp{Ae^{-i\theta}}{g} =  \text{Re} \inp{Ae^{-i\theta}}{g} \le M\)
 \begin{corollary} If \(A \ge 0\), then \(\displaystyle \norm{A} = \sup _{\norm{x} = 1} \inp{Ax}{x}\) \end{corollary}
 \begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
 
+
+
+\begin{theorem}[Courant-Fischer] Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then 
+  \[ \lambda_k = \min_{\omega_1, \ldots , \omega_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp \omega_1, \ldots , \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+ \end{theorem}
+
+
+\begin{proof} If \(x \neq 0\), then \[\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} =  \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\] and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
+
+
+
+Thus if \(\omega_1, \ldots , \omega_{n-k}\) are given, then 
+
+\begin{equation*} \begin{split}
+\sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} & = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} \\
+%\textrm{x \perp \omega if and only if y \perp \adj{U} \omega.} \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i} \\
+&  \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2 \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_{k-1} = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2 \\
+&  \ge \lambda_k 
+\end{split} \end{equation*}
+
+
+Let \(\omega_1 = x_n , \ \omega_2 = x_{n-1}, \ \ldots , \ \omega_{n-k} = x_{k + 1}\)
+
+If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
+
+\begin{equation*} \begin{split}
+\inp{Ax}{x} & = \inp{A \sum_{i = 1} ^ n c_i x_i}{ \sum_{i = 1} ^n c_i x_i} \\
+&  = \inp{\sum_{i = 1} ^n c_i \lambda_i x_i}{\sum_{i = 1} ^n c_i x_i}\\
+& = \sum_{i = 1} ^ k \lambda_i \abs{c_i}^2 \\
+&  \le \lambda_k \sum_{i = 1} ^{k} \abs{c_i}^2
+\end{split} \end{equation*}
+\end{proof}
+
+
 \subsection{Projectors}
 A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
 
-\begin{theorem} There exists a subspace \(M\) of \(\mathbb{C}^n\) such that \(Pm = m \ \forall m \in M\), and \(P x = 0 \ \forall x \in m^\perp\) \end{theorem}
-\begin{proof} Let \(m\) be a vector in the range of \(P\), that is, \(m= Px\) for some \(x\). Then \(Pm = P^2 x = Px = m\). 
+\begin{theorem} There exists a subspace \(M\) of \(\mathbb{C}^n\) such that 
+
+\[\begin{cases}
+Pm = m & \forall m \in M \\
+Px = 0 & \forall x \in M^\perp 
+\end{cases}\] 
+\end{theorem}
+\begin{proof} Let \(m \in \mathrm{range}(P)\), that is, \(m= Pv\) for some \(v\). Then \(Pm = P^2 v = Pv = m\). 
 \(Pm - m\) belongs to the null space of \(P\)
 \(P(Pm -m) = P^2m - Pm = Pm - Pm = 0\)  
 \(\mathrm{null}(P)\) is orthogonal to the \(\mathrm{range}(P)\)
@@ -406,9 +456,10 @@ The last one \(I - \adj{S} S\) is a projector.
 
 \section{Schur-Cohn Theorem}
 
-Given any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\] with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside. Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
+\subsection{Theorem}
+Given any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + a_2 z^{n-2} + \cdots +  a_{n-1} z + a_n\] with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside.
 
-Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
+ Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
 
  Then \(p(S) \) is \( \begin{bmatrix} 
 
@@ -421,7 +472,7 @@ a_n & a_{n-1} & a_{n-2} & \cdots & a_1 \\
 \end{bmatrix}\). 
 
 
-This can be factorized as \[p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\] Let \(B_j = S - \alpha_jI\). Then \(p(S) = \prod_j B_j\)
+This can be factorized as \[p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\] Let \(B_j = S - \alpha_jI\). Then \(p(S) =\displaystyle \prod_{j=1}^n B_j\)
 
 Next, define \(q\) to be the polynomial 
 \[q(z) = \conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\] 
@@ -433,7 +484,10 @@ q \left(\frac{1}{\conj{\alpha_i}} \right) & = \frac{\conj{a_n}}{\conj{\alpha_i}^
 & = \frac{\conj{p(\alpha_i)}}{\conj{\alpha_i}^n} = 0
 \end{split}\end{equation*}
 
-We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\). Also, \(q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\). Let \(C_j= I -  \conj{\alpha_j} S\). Then \(q(S) = \prod_j C_j\).
+We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_n}z)\). Then \(q(S)\) can be factorized as
+\[q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\]
+
+ Let \(C_j= I -  \conj{\alpha_j} S\). Then \(q(S) =\displaystyle \prod_{j=1}^n C_j\).
 
 
 Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
@@ -445,16 +499,14 @@ Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}
 The \(n \times n\) matrix corresponding to this Hermitian form is  \(H = \adj{q}(S) q(S) - \adj{p}(S) p(S)\).
 
 
-We can now state the Schur-Cohn theorem:
+We now state the Schur-Cohn theorem:
 
-\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
+\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle \(|z| = 1\), and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \subsection{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
 
 We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees with the help of the Spectral theorem and the Courant-Fischer theorem. 
-
-
 
 
 Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. 
@@ -471,74 +523,89 @@ For \(n =1\), this is equal to \(\adj{C_1} C_1 - \adj{B_1} B_1\).
 \end{split}
 \end{equation*}
 
-For \(n = 1\), \(I - \adj{S}S\) is just a \(1 \times 1\) matrix, so \(H = (1 - \abs{\alpha_1}^2)\). 
+For \(n = 1\), \(I - \adj{S}S\) is just a \(1 \times 1\) matrix, so \(H = \begin{bmatrix} 1 - \abs{\alpha_1}^2 \end{bmatrix}\). 
 
 
 
-Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha_1} < 1\), then root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha_1} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
+Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha_1} < 1\), then the root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha_1} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
 
 
-\subsection{Courant-Fischer theorem}
-
-\begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then 
-  \[ \lambda_k = \min_{\omega_1, \ldots , \omega_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp \omega_1, \ldots , \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
- \end{theorem}
-
-
-\begin{proof} If \(x \neq 0\), then \[\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} =  \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\] and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
-
-
-
-Thus if \(\omega_1, \ldots , \omega_{n-k}\) are given, then 
-
+For general \(n\),  
 \begin{equation*} \begin{split}
-\sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} & = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} \\
-%\textrm{x \perp \omega if and only if y \perp \adj{U} \omega.} \\
-&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i} \\
-&  \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2 \\
-&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2 \\
-&  \ge \lambda_k 
+H & =  \adj{q}(S) q(S) - \adj{p}(S) p(S) \\
+&= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n) \\
+& = (\adj{C_n} \cdots \adj{C_1})( C_1 \cdots C_n) - (\adj{B_n} \cdots \adj{B_1}) (B_1 \cdots B_n) 
 \end{split} \end{equation*}
 
-
-Let \(\omega_1 = x_n , \ldots , \ \omega_{n-k} = x_{k + 1}\)
-
-If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
-
-\begin{equation*} \begin{split}
-\inp{Ax}{x} & = \inp{A \sum_{i = 1} ^ n c_i X_i}{ \sum_{i = 1} ^n c_i x_i} \\
-&  = \inp{\sum_{i = 1} ^n c_i \lambda_i x_i}{\sum_{i = 1} ^n c_i x_i}\\
-& = \sum_{i = 1} ^ k \lambda_i \abs{c_i}^2 \\
-&  \le \lambda_k \sum_{i = 1} ^{k} \abs{c_i}^2
-\end{split} \end{equation*}
-\end{proof}
-
-
-\subsection{Continuing the proof}
-
-For general \(n\), 
-
-\begin{equation*} \begin{split}
-\adj{q}(S) q(S) - \adj{p}(S) p(S) &= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n) \\
-& = (\adj{C_n} \cdots \adj{C_1})( C_n \cdots C_1) - (\adj{B_n} \cdots \adj{B_1}) (B_n \cdots B_1)
-\end{split} \end{equation*}
-
-\(B_i\) commutes with \(C_j\). 
-
-\(1 - \adj{S} S = e_1 \adj{e_1}\). 
-
-\begin{equation*} \begin{split}
-\adj{C_j} C_j - \adj{B_j} B_j & = (1 - \abs{\alpha_j}^2) (1 - \adj{S} S) \\ 
-& = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}
-\end{split} \end{equation*}
+%Fit the remarks into the proof.
+\begin{remark} \(B_i\) commutes with \(C_j\). \end{remark}
+\begin{remark} \(1 - \adj{S} S = e_1 \adj{e_1}\). \end{remark}
+\begin{remark}\(\adj{C_j} C_j - \adj{B_j} B_j  = (1 - \abs{\alpha_j}^2) (1 - \adj{S} S)  = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}\) \end{remark}
 
 We can add and subtract terms to get a telescoping series:
 
-%Add telescoping series
+\[\begin{array}{cccc}
+  & (\adj{C_n} \cdots \adj{C_2}) \adj{C_1} C_1 ( C_2 \cdots C_n) & - & (\adj{C_n} \cdots \adj{C_2}) \adj{B_1} B_1 (C_2 \cdots C_n) \\
+ + & \adj{B_1} (\adj{C_n} \cdots \adj{C_3}) \adj{C_2} C_2( C_2 \cdots C_n) B_1 & -& \adj{B_1}(\adj{C_n} \cdots \adj{C_3}) \adj{B_2} B_2(C_3 \cdots C_n) B_1 \\
+    + & \adj{B_1} \adj{B_2} (\adj{C_n} \cdots \adj{C_4})\adj{C_3} C_3( C_4 \cdots C_n) B_2 B_1& -& \adj{B_1} \adj{B_2}(\adj{C_n} \cdots \adj{C_4})\adj{B_3} B_3 (C_4 \cdots C_n) B_2 B_1 \\
+ + & \vdots & -& \vdots  \\
+ + & \vdots & -& \vdots  \\
+ + & (\adj{B_1} \adj{B_2} \cdots \adj{B_{n-1}}) \adj{C_n} C_n  (B_{n-1} \cdots  B_2 B_1) & -& (\adj{B_1} \cdots \adj{B_{n-1}})\adj{B_n} B_n (B_{n-1} \cdots B_1) \\
+\end{array}\]
 
-We get \(H =\displaystyle \sum_{j=1} ^n (1-\abs{\alpha_j}^2) V_j \adj{V_j}\), where \(V_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1\)
+\begin{equation*} \begin{split}
+& = \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) (\adj{C_j} C_j - \adj{B_j} B_j) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \\
+& = \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) ((1-\abs{\alpha_j}^2) e_1 \adj{e_1}) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \\
+& =  \sum_{j=1} ^n (1-\abs{\alpha_j}^2) v_j \adj{v_j}, \text{ where } v_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1.
+\end{split}\end{equation*}
+
+% We get \(H =\displaystyle \sum_{j=1} ^n (1-\abs{\alpha_j}^2) V_j \adj{V_j}\), where \(V_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1\)
+
+\(V = \begin{bmatrix} v_1 & v_2 & v_3 & \cdots & v_n \end{bmatrix} \). 
+
+\(D = \begin{bmatrix} 1 - \abs{\alpha_1}^2 & 0 & 0 & \cdots & 0 \\
+0 & 1 - \abs{\alpha_2}^2 & 0 & \cdots & 0 \\
+0 & 0 & 1- \abs{\alpha_3}^2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots& \vdots \\
+0 & 0 & 0 & \cdots & 1 - \abs{\alpha_n}^2 \end{bmatrix}\)
+
+
+\[H = \sum_{j = 1} ^n (1 - \abs{\alpha_j}^2) v_j \adj{v_j} = V D \adj{V}\]
+
+\(H\) is invertible \(\iff\) \(V\) is invertible. 
+
+Let \(D\) be positive definite. 
+
+\begin{equation*}\begin{split}
+\inp{Hx}{x} & = \inp{VD\adj{V} x}{x} \\
+& = \inp{D\adj{V} x}{\adj{V}x} \\
+& = \inp{Dy}{y} \\
+& = \sum_{j =1}^n (1 - \abs{\alpha_j}^2) \abs{y_j}^2 > 0
+\end{split} \end{equation*}
+
+
+Converse: Let \(H\) be positive definite
+
+\(D = V^{-1} H (\adj{V}) ^{-1} = (V^{-1} H \adj{(V^{-1})} \implies \) \(D\) is positive definite.
+
+
+
+Let the eigenvalues of \(H\) be \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_k \le \cdots \le \lambda_n\).
+
+Let \(\lambda > 0\). Then given any \(\omega_1, \omega_2, \ldots , \omega_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x \perp \omega_1, \omega_2 , \ldots , \omega_{n-k}\) and \(\inp{Dx}{x} > 0\).
+
+\[\inp{Hx}{x} = \inp{VD\adj{V} x}{x} = \inp{D\adj{V} x}{\adj{V}x}\]
+
+Let \(\omega_1, \omega_2, \ldots , \omega_{n-k}\) be given. Let \(\inp{y}{\omega_i} = 0 \forall i\). Let \(x = \adj{V}y\). 
+
+\(\inp{(\adj{V})^{-1}x}{\omega_i} = 0\) or \( \inp{x}{V^{-1} \omega_i} = 0\).
+
+\(x \perp\) to all of \(V^{-1}\omega_1,  V^{-1} \omega_2, \ldots , V^{-1} \omega_{n-k}\).
+
+So \(\inp{Dx}{x} > 0\) or \(\inp{V^{-1} H V^{*^{-1}} x}{x} > 0\) or \(\inp{Hy}{y} > 0\).
+\subsection{Example}
+
 \section{Extensions}
-
 
 \subsection{Arbitrary radius}
 To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. 
