@@ -102,8 +102,11 @@ First we will define some basic terms that will be used ahead in the paper.
 \subsubsection{Operator norm}
 Given \(A \in \mathbb{M}_n\) (the set of \(n \times n\) square matrices with complex elements), the operator norm of \(A\), denoted by \(\norm{A}\), is defined as \[\norm{A} =\displaystyle \sup _{x \neq 0} \frac{\norm{Ax}}{\norm{x}} = \sup_{\norm{x} = 1} \norm{Ax} \]
 
- The triangle inequality \(\norm{A + B} \leq \norm{A} + \norm{B}\) is satisfied. 
-
+\begin{theorem} The operator norm satisfies the triangle inequality \(\norm{A + B} \leq \norm{A} + \norm{B}\). \end{theorem}
+\begin{proof} \begin{equation*} \begin{split}
+\norm{A + B}  = \sup _{x \ne 0} \frac{\norm{(A + B) x}}{\norm{x}} & \le \sup_{x \ne 0} \frac{\norm{Ax} +\norm{Bx}}{\norm{x}} \\
+& \le \sup_{x \ne 0} \frac{\norm{Ax}}{\norm{x}} + \sup_{x \ne 0} \frac{\norm{Bx}}{\norm{x}} = \norm{A} + \norm{B}
+\end{split} \end{equation*} \end{proof}
 \subsubsection{Hilbert-Schmidt norm}
 
 The Hilbert-Schmidt norm of matrix \(A\), denoted by \(\norm{A}_2\),  is defined as the square root of sum of squares of all entries in \(A\). 
@@ -151,10 +154,9 @@ For vectors on \(\mathbb{C}^n\), the inner product \(\inp{x}{y}\) is defined as 
 
 \subsection{Adjoint}
 
-Let \(A \in \mathbb{M}_n\). The adjoint of matrix \(A\), denoted by \(\adj{A}\), is the matrix that  satisfies \(\inp{\adj{A}x}{y} = \inp{x}{Ay}\). 
+Let \(A \in \mathbb{M}_n\). The adjoint of matrix \(A\), denoted by \(\adj{A}\), is the matrix that  satisfies \(\inp{\adj{A}x}{y} = \inp{x}{Ay}\). The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\).
 
 \begin{theorem} The adjoint of a matrix is obtained by taking the complex conjugate of every element, followed by transposing the matrix. \end{theorem}
-
 
 \begin{proof} Using properties of inner product on \(\mathbb{C}^n\),
 \begin{equation*} \begin{split}
@@ -167,8 +169,9 @@ Therefore \(\trp{(\adj{A})} = \conj{A}\), or \(\adj{A} = \trp{(\conj{A})}\). \en
 
 \begin{remark} The adjoint of the adjoint of a matrix is the original matrix itself, \(\adj{(\adj{A})} = A\). \end{remark}
 
-\begin{remark} The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\). \end{remark}
 
+\begin{theorem} \(\norm{A} = \norm{\adj{A}}\) \end{theorem}
+\begin{proof} Left to the reader. \end{proof}
 
 \subsection{Positive Definite Matrix}
 
@@ -183,10 +186,6 @@ A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x 
 
 Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\); all eigenvalues of \(A\) are non-negative. \end{proof}
 
-
-\begin{lemma} If \(A \ge 0\), then \(\displaystyle \norm{A} = \sup _{\norm{x} = 1} \inp{Ax}{x}\) \end{lemma}
-%check this proof. Looks wrong
-\begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
 
 \begin{theorem} \(\adj{A} A\) is a positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
 \begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
@@ -287,7 +286,10 @@ Let \(\mathcal{M} = \{y \in \mathbb{C}^n, \ \inp{y}{x} = 0\}\)
 % finish the proof
 \end{proof}
 
+\begin{theorem} If \(A \in \mathbb{M}_n\) is Hermitian, then \(\inp{Ax}{x}\) is real for all \(x\). \end{theorem}
+\begin{proof} \(\inp{Ax}{x} = \inp{x}{\adj{A}x} = \inp{x}{Ax} = \conj{\inp{Ax}{x}}\). \end{proof}
 
+The converse of this theorem is also true.
 
 \begin{theorem}\label{eig_real_herm} If \(A \in \mathbb{M}_n\) and \(\inp{Ax}{x} \in \mathbb{R}\) for every \(x \in \mathbb{C}_n\), then \(A\) is a Hermitian matrix. \end{theorem}
 
@@ -311,7 +313,7 @@ Solving this system gives us \(\inp{Ag}{h} = \inp{g}{Ah}\), which is equal to \(
 \begin{corollary}Every positive semidefinite matrix \(A \in \mathbb{M}_n\) is Hermitian.\end{corollary}
 \begin{proof} \(A\) is a positive semidefinite matrix, so \(\inp{Ax}{x} \ge 0 \),  so \(\inp{Ax}{x} \in \mathbb{R}\) for all \(x\). By Theorem \ref{eig_real_herm}, \(A\) is Hermitian. \end{proof}
 
-\begin{lemma} If \(A\) is Hermitian, then \(\norm{A} =\displaystyle \sup_{\norm{h} = 1} \abs{\inp{Ah}{h}}\).\end{lemma}
+\begin{theorem}\label{norm_herm} If \(A\) is Hermitian, then \(\norm{A} =\displaystyle \sup_{\norm{h} = 1} \abs{\inp{Ah}{h}}\).\end{theorem}
 \begin{proof} Let \(x \in \mathbb{C}^n\). Then for any \(g \in \mathbb{C}^n\), we have \(\abs{\inp{x}{g}} \le \norm{x} \norm{g}\). (By Cauchy-Schwartz).
 
 So \(\abs{\inp{x}{\frac{g}{\norm{g}}}} \le \norm{x}\) 
@@ -345,13 +347,23 @@ So \(\inp{Ae^{-i\theta}}{g} =  \text{Re} \inp{Ae^{-i\theta}}{g} \le M\)
 \end{proof}
 
 
-\begin{lemma} If \(\inp{Ah}{h} = 0\) for all \(h\), then \(A = 0\).\end{lemma}
-\begin{proof} Left to the reader \end{proof}
+\begin{corollary} If \(\inp{Ax}{x} = 0\) for all \(x\), then \(A = 0\).\end{corollary}
+\begin{proof} Since \(\inp{Ax}{x} = 0\) for all \(x\), we have \(\sup \abs{\inp{Ax}{x}} = 0\). By Theorem \ref{norm_herm},\( \norm{A} = 0 \). This is true only when \(A = 0\).\end{proof}
+
+
+\begin{corollary} If \(A \ge 0\), then \(\displaystyle \norm{A} = \sup _{\norm{x} = 1} \inp{Ax}{x}\) \end{corollary}
+\begin{proof} \(\inp{Ax}{x} \le \norm{Ax} \norm{x} \le \norm{A} \norm{x}^2\). So \(\displaystyle \sup_{\norm{x} = 1} \inp{Ax}{x} \leq \norm{A} \) \end{proof}
+
 \subsection{Projectors}
 A matrix \(P\) is a projector if \(P^2 = P\) and \(\adj{P} = P\)
 
 \begin{theorem} There exists a subspace \(M\) of \(\mathbb{C}^n\) such that \(Pm = m \ \forall m \in M\), and \(P x = 0 \ \forall x \in m^\perp\) \end{theorem}
-\begin{proof} Left to the reader \end{proof}
+\begin{proof} Let \(m\) be a vector in the range of \(P\), that is, \(m= Px\) for some \(x\). Then \(Pm = P^2 x = Px = m\). 
+\(Pm - m\) belongs to the null space of \(P\)
+\(P(Pm -m) = P^2m - Pm = Pm - Pm = 0\)  
+\(\mathrm{null}(P)\) is orthogonal to the \(\mathrm{range}(P)\)
+%frame the arguments better
+ \end{proof}
 
 \subsection{Shift Matrix}
 Let \(S\), the {\em shift matrix},  be the \(n \times n\) square matrix \( \begin{bmatrix} 
@@ -394,25 +406,34 @@ The last one \(I - \adj{S} S\) is a projector.
 
 \section{Schur-Cohn Theorem}
 
-Given any polynomial \(p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\) with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside. Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
+Given any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + \cdots + a_n\] with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside. Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. 
 
 Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
 
  Then \(p(S) \) is \( \begin{bmatrix} 
 
 % replace zeroes with dots
-a_n & a_{n-1} & \ddots & \ddots & a_1 \\
-0 & a_n & a_{n-1} & \ddots & \ddots \\
-0 & 0 & a_n & \ddots & \ddots \\
-0 & 0 & 0 &\ddots & a_{n-1} \\
-0 & 0 & 0 & 0 & a_n \\ 
+a_n & a_{n-1} & a_{n-2} & \cdots & a_1 \\
+0 & a_n & a_{n-1} & \cdots & a_2 \\
+0 & 0 & a_n & \cdots & a_3 \\
+\vdots & \vdots & \ddots &\ddots & \vdots \\
+0 & 0 & \cdots & 0 & a_n \\ 
 \end{bmatrix}\). 
 
 
-This can be factorized as \(p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\). Let \(B_j = S - \alpha_jI\).
+This can be factorized as \[p(S) = (S - \alpha_1I) (S - \alpha_2 I) \cdots (S - \alpha_n I)\] Let \(B_j = S - \alpha_jI\). Then \(p(S) = \prod_j B_j\)
 
-Next, define \(q\) as the polynomial \(\conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\). Note that its roots are \(\frac {1}{\conj{\alpha_i}}\). We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\). Also, \(q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\). Let \(C_j= I -  \conj{\alpha_j} S\).
-%Explain how roots of q are obtained.
+Next, define \(q\) to be the polynomial 
+\[q(z) = \conj{a_n}z^n + \conj{a_{n-1}}z^{n-1} + \cdots + \conj{a_0}\] 
+
+Note that its roots are \(\frac {1}{\conj{\alpha_i}}\). 
+\begin{equation*}\begin{split}
+q \left(\frac{1}{\conj{\alpha_i}} \right) & = \frac{\conj{a_n}}{\conj{\alpha_i}^n} + \frac{\conj{a_{n-1}}}{\conj{\alpha_i}^{n-1}} + \cdots + \conj{a_0} \\
+& = \frac{1}{\conj{\alpha_i}^n} (\conj{a_n} + \conj{a_{n-1}} \conj{\alpha_i} + \cdots + \conj{a_0} \conj{\alpha_i}^n) \\
+& = \frac{\conj{p(\alpha_i)}}{\conj{\alpha_i}^n} = 0
+\end{split}\end{equation*}
+
+We get \(q(z) = (1 - \conj{\alpha_1}z) (1 - \conj{\alpha_2}z) \cdots (1 - \conj{\alpha_nz})\). Also, \(q(S) = (I - \conj{\alpha_1}S) (I - \conj{\alpha_2}S) \cdots (I - \conj{\alpha_n}S)\). Let \(C_j= I -  \conj{\alpha_j} S\). Then \(q(S) = \prod_j C_j\).
 
 
 Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
@@ -426,7 +447,7 @@ The \(n \times n\) matrix corresponding to this Hermitian form is  \(H = \adj{q}
 
 We can now state the Schur-Cohn theorem:
 
-\begin{theorem}The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
+\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle, and \(n-k\) roots outside the circle iff \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \subsection{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
@@ -434,17 +455,15 @@ We can now state the Schur-Cohn theorem:
 We will first prove the Schur-Cohn theorem for \(n =1\), that is for linear polynomials. It will then be extended to polynomials of higher degrees with the help of the Spectral theorem and the Courant-Fischer theorem. 
 
 
-\subsection{Linear Polynomial}
 
 
-Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. \(\adj{q(S)} q(S) - \adj{p(S)} p(S) \\= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
+Let's write \(q(S)\) and \(p(S)\) as a product of the linear terms. 
+\[\adj{q(S)} q(S) - \adj{p(S)} p(S) \\= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\]
 
 For \(n =1\), this is equal to \(\adj{C_1} C_1 - \adj{B_1} B_1\). 
-
 \begin{equation*}
 \begin{split}
-&    \adj{C_1}C_1 - \adj{B_1} B_1 \\
- & = \adj{(I - \conj{\alpha_1}S)} (I - \conj{\alpha_1}S) - \adj{(S - \alpha_1 I)} (S - \alpha_1 I) \\
+  \adj{C_1}C_1 - \adj{B_1} B_1  & = \adj{(I - \conj{\alpha_1}S)} (I - \conj{\alpha_1}S) - \adj{(S - \alpha_1 I)} (S - \alpha_1 I) \\
 & = (I - \alpha_1\adj{S}) (I - \conj{\alpha_1}S) - (\adj{S} - \conj{\alpha_1} I) (S - \alpha_1 I) \\
  & = (I - \alpha_1\adj{S} - \conj{\alpha_1}S + \abs{\alpha_1}^2 \adj{S} S) - (\adj{S} S - \alpha_1 \adj{S} - \conj{\alpha_1} S + \abs{\alpha_1}^2I)\\
 & = I - \abs{\alpha_1}^2 I - \adj{S} S + \abs{\alpha_1}^2 \adj{S} S \\
@@ -456,53 +475,42 @@ For \(n = 1\), \(I - \adj{S}S\) is just a \(1 \times 1\) matrix, so \(H = (1 - \
 
 
 
-Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha} < 1\), then root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
+Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha_1} < 1\), then root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha_1} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
 
 
 \subsection{Courant-Fischer theorem}
 
 \begin{theorem} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Then 
-
   \[ \lambda_k = \min_{\omega_1, \ldots , \omega_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp \omega_1, \ldots , \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
-
  \end{theorem}
 
 
-
-
-\begin{proof} If \(x \neq 0\), then \(\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} \\
- = \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\). and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
+\begin{proof} If \(x \neq 0\), then \[\frac{\inp{Ax}{x}}{\inp{x}{x}} = \frac{\inp{U \Lambda \adj{U} x}{x}}{\inp{\adj{U} x}{ \adj{U} x}} =  \frac{\inp{\Lambda \adj{U} x}{ \adj{U} x}}{\inp{\adj{U}x}{\adj{U}x}}\] and \( \{ \adj{U} x : x \neq 0\}  = \{ x \in \mathbb{C}^n : x \neq 0 \}\) 
 
 
 
 Thus if \(\omega_1, \ldots , \omega_{n-k}\) are given, then 
 
-\[ \sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}}\]
-
-\(x \perp \omega\) if and only if \(y \perp \adj{U} \omega\). 
-
-\[ = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i}\]
-
-\[ \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2\]
-
-\[ = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2\]
-
-\[ \ge \lambda_k \]
+\begin{equation*} \begin{split}
+\sup_{\substack{x \neq 0 \\ x \perp \omega_1, \ldots, \ \omega_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} & = \sup_{\substack{y \neq 0 \\ y \perp \adj{U}\omega_1, \ldots ,\ \adj{U} \omega_{n-k}}} \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} \\
+%\textrm{x \perp \omega if and only if y \perp \adj{U} \omega.} \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k}}} \sum_{i = 1}^n \lambda_i \abs{y_i} \\
+&  \ge \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = 1}^n \lambda_i \abs{x_i}^2 \\
+&  = \sup_{\substack{\inp{y}{y} = 1 \\ y \perp \adj{U} \omega_1, \ \ldots , \ \adj{U}\omega_{n-k} \\ y_1 = y_2 = \cdots = y_k-1 = 0 }} \sum_{i = k}^n \lambda_i \abs{y_i}^2 \\
+&  \ge \lambda_k 
+\end{split} \end{equation*}
 
 
 Let \(\omega_1 = x_n , \ldots , \ \omega_{n-k} = x_{k + 1}\)
 
 If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\). 
 
-\(\inp{Ax}{x} = \inp{A \sum_{i = 1} ^ n c_i X_i}{ \sum_{i = 1} ^n c_i x_i}\)
-
-\( = \inp{\sum_{i = 1} ^n c_i \lambda_i x_i}{\sum_{i = 1} ^n c_i x_i}\)
-
-\(= \sum_{i = 1} ^ k \lambda_i \abs{c_i}^2\) 
-
-\( \le \lambda_k \sum_{i = 1} ^{k} \abs{c_i}^2\)
-
-
+\begin{equation*} \begin{split}
+\inp{Ax}{x} & = \inp{A \sum_{i = 1} ^ n c_i X_i}{ \sum_{i = 1} ^n c_i x_i} \\
+&  = \inp{\sum_{i = 1} ^n c_i \lambda_i x_i}{\sum_{i = 1} ^n c_i x_i}\\
+& = \sum_{i = 1} ^ k \lambda_i \abs{c_i}^2 \\
+&  \le \lambda_k \sum_{i = 1} ^{k} \abs{c_i}^2
+\end{split} \end{equation*}
 \end{proof}
 
 
@@ -510,17 +518,19 @@ If \(x\perp \omega_i\), as above, then \(x = \sum_{i = 1} ^k c_i x_i\).
 
 For general \(n\), 
 
-\(\adj{q}(S) q(S) - \adj{p}(S) p(S)\) 
-
-\(= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n)\)
-
-\(= \adj{C_n} \cdots \adj{C_1} C_n \cdots C_1 - \adj{B_n} \cdots \adj{B_1} B_n \cdots B_1\)
+\begin{equation*} \begin{split}
+\adj{q}(S) q(S) - \adj{p}(S) p(S) &= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n) \\
+& = (\adj{C_n} \cdots \adj{C_1})( C_n \cdots C_1) - (\adj{B_n} \cdots \adj{B_1}) (B_n \cdots B_1)
+\end{split} \end{equation*}
 
 \(B_i\) commutes with \(C_j\). 
 
 \(1 - \adj{S} S = e_1 \adj{e_1}\). 
 
-\(\adj{C_j} C_j - \adj{B_j} B_j = (1 - \abs{\alpha_j}^2) (1 - \adj{S} S) = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}\)
+\begin{equation*} \begin{split}
+\adj{C_j} C_j - \adj{B_j} B_j & = (1 - \abs{\alpha_j}^2) (1 - \adj{S} S) \\ 
+& = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}
+\end{split} \end{equation*}
 
 We can add and subtract terms to get a telescoping series:
 

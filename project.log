@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.27)  2 DEC 2017 19:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.27)  3 DEC 2017 13:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -652,32 +652,32 @@ LaTeX Font Info:    External font `lmex10' loaded for size
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 134.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 137.
 
  (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 134.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 137.
  [2] [3] [4] [5] [6] [7] [8] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 547.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 557.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 547.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 557.
  (./project.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 547.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 547.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 557.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 557.
 Package rerunfilecheck Info: File `project.out' has not changed.
-(rerunfilecheck)             Checksum: B1B50911D427462896F8732D93D6999E;1444.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 547.
+(rerunfilecheck)             Checksum: 18EE2A958F3A6D55F38FBFFF40B32FAE;1377.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 557.
  ) 
 Here is how much of TeX's memory you used:
- 10773 strings out of 494953
- 164458 string characters out of 6180977
- 298545 words of memory out of 5000000
+ 10774 strings out of 494953
+ 164457 string characters out of 6180977
+ 298572 words of memory out of 5000000
  13748 multiletter control sequences out of 15000+600000
- 72639 words of font info for 102 fonts, out of 8000000 for 9000
+ 72556 words of font info for 101 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 40i,17n,43p,472b,422s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,21n,43p,476b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm
@@ -694,10 +694,10 @@ share/texmf/fonts/type1/public/lm/lmr5.pfb></usr/share/texmf/fonts/type1/public
 /type1/public/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/symbols/msbm7.pfb>
-Output written on project.pdf (10 pages, 296021 bytes).
+Output written on project.pdf (10 pages, 298579 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
- 22209 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 259 PDF objects out of 1000 (max. 8388607)
+ 226 compressed objects within 3 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 22201 words of extra memory for PDF output out of 24883 (max. 10000000)
 
