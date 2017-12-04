@@ -1,0 +1,9 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'project.blg'
+[63] biber:287> INFO - === Tue Dec  5, 2017, 00:31:22
+[197] Biber.pm:348> INFO - Reading 'project.bcf'
+[406] Biber.pm:742> INFO - Found 0 citekeys in bib section 0
+[407] Utils.pm:147> WARN - The file 'project.bcf' does not contain any citations!
+[414] bbl.pm:519> INFO - Writing 'project.bbl' with encoding 'ascii'
+[416] bbl.pm:615> INFO - Output to project.bbl
+[416] Biber.pm:109> INFO - WARNINGS: 1
