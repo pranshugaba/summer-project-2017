@@ -75,10 +75,13 @@
 \renewcommand{\maketitlehookd}{%
 
 \begin{abstract}
-We looked at the general properties of Hermitian (self-adjoint) matrices, and used the Schur-Cohn theorem to find the number of roots of a polynomial lying within and without the unit circle. 
+We looked at various concepts in linear algebra such as norms, unitary matrices, and Hermitian matrices, and studied their applications. In particular, we examined the generalized Schur-Cohn theorem, which relates the number of roots of a polynomial lying within and without the unit circle with the parity of eigenvalues of a matrix formed by coefficients of the polynomial.
+
+\[\textbf{Acknowledgements}\]
+
+I am grateful to Prof. Tirthankar Bhattacharya for guiding me in this project, introducing me to interesting new concepts in mathematics, and making this an enriching experience altogether.
 \end{abstract}
 }
-
 
 \begin{document}
 \maketitle
@@ -172,9 +175,6 @@ For two matrices \(A, B \in \mathbb{M}_n\), \(A \le B\) denotes \(B - A\) is pos
 
 Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite, and \(\inp{x_i}{x_i}\) is positive by definition of inner product. Hence \(\lambda_i \ge 0\); all eigenvalues of \(A\) are non-negative. \end{proof}
 
-\begin{theorem}\label{pdm} \(\adj{A} A\) and \(A \adj{A}\) are positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
-\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
-
 
 \subsection{Adjoint}
 
@@ -202,13 +202,15 @@ Therefore \(\trp{(\adj{A})} = \conj{A}\), or \(\adj{A} = \trp{(\conj{A})}\). \en
 
 \[ \norm{\adj{A}}^2   = \sup_{\norm{x} = 1} \norm{\adj{A} x}^2  = \sup_{\norm{x} = 1} \inp{\adj{A}x}{\adj{A}x}  = \sup_{\norm{x} = 1} \inp{A \adj{A} x}{x}  = \norm{A \adj{A}} \le \norm{A} \norm{\adj{A}}\]
 
-However, from Theorem \ref{submulti}, we get  \(\norm{\adj{A} A} \le \norm{\adj{A}} \norm{A}\). Hence, \(\norm{A}^2 \le \norm{\adj{A}} \norm{A}\), which implies  \(\norm{A} \le \norm{\adj{A}}\). Similarly, in the second equation we get \(\norm{\adj{A}} \le \norm{A}\). 
+However, using  Theorem \ref{submulti}, we get  \(\norm{\adj{A} A} \le \norm{\adj{A}} \norm{A}\) in the first equation. Hence, \(\norm{A}^2 \le \norm{\adj{A}} \norm{A}\), which implies  \(\norm{A} \le \norm{\adj{A}}\). Similarly, in the second equation we get \(\norm{\adj{A}} \le \norm{A}\). 
 
 Since both these inequalities are true, it necessarily means that \(\norm{A} = \norm{\adj{A}}\).
 \end{proof}
 
+\begin{theorem}\label{pdm} \(\adj{A} A\) and \(A \adj{A}\) are positive semidefinite for all \(A \in \mathbb{M}_n\). \end{theorem}
+\begin{proof} \(\inp{\adj{A} A x}{ x} = \inp{Ax}{Ax} = \norm{Ax}^2 \ge 0\)\end{proof}
 
-\subsection{Unitary Matrices}
+\subsection{Unitary Matrix}
 
 A square matrix \(U\) that satisfies \(\adj{U} U = I\) is called a unitary matrix.
 
@@ -263,7 +265,6 @@ A matrix that satisfies \(A = \adj{A}\) is called a Hermitian matrix (or a self-
 \begin{theorem} \label{herm_eig_real} Let \(A \in \mathbb{M}_n\) be a Hermitian matrix. Then all eigenvalues of \(A\) are real. \end{theorem}
 
 \begin{proof}
-%format equations
 Let \(v\) be an eigenvector of a matrix \(A\), and let \(\lambda\) be the corresponding eigenvalue. Then \(Av = \lambda v\). 
 
 \[ \lambda\inp{v}{v} = \inp{\lambda v}{v} =  \inp{Av}{v} = \inp{v}{\adj{A}v} = \inp{v}{Av} = \inp{v}{\lambda v} = \conj{\lambda} \inp{v}{v}\]
@@ -287,18 +288,22 @@ Since \(\lambda \ne \mu\), \(\inp{u}{v}\) must be zero. Eigenvectors \(u\) and \
 
 A diagonal matrix is a matrix whose non-diagonal entries are all zero. \(a_{ij} = 0\) if \(i \ne j\)
 
-\begin{theorem}[Spectral theorem]  For every Hermitian matrix \(A\), there exists a unitary matrix \(U\) such that \( \adj{U} A  U\) is a diagonal matrix. \end{theorem}
+\begin{theorem}[Spectral theorem]  For every Hermitian matrix \(A\), there exists a unitary matrix \(U\) such that \(A = U \Lambda \adj{U}\), where \(\Lambda\) is the diagonal matrix \(\begin{bmatrix}
+\lambda_1 & 0 & 0 & \cdots & 0\\
+0 & \lambda_2 & 0 & \cdots & 0\\
+0 & 0 & \lambda_3 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda_n \end{bmatrix}\) containing eigenvalues of \(A\). \end{theorem}
 
 \begin{proof} 
-The matrix \(U\) is a unitary matrix, which means \(\adj{U} U = I\)
+The matrix \(A\) is a linear transformation \(T\) with respect to the standard basis \(I\). The matrix \(U\) is a unitary matrix, so its columns \(u_1, u_2, \ldots , u_n\) form an orthonormal basis for \(\Lambda\). Since \(U\) is a unitary vector, \(\adj{U} = U^{-1}\). This means \(\Lambda\) is the matrix of the same transformation \(T\) with respect to a different basis \(U\), and that \(A\) and \(\Lambda\) have the same eigenvalues.
 
 
+Start with any eigenvalue \(\lambda_1\) of \(A\). Let \(x_1\) be a unit eigenvector corresponding to \(\lambda_1\).
 
-Start with any eigenvalue \(\lambda_i\) of \(A\). Let \(x_i\) be a unit eigenvector corresponding to \(\lambda_i\).
+The basis transforms from \(x_i \mapsto \adj{U}x_i\)
 
-Let \(\mathcal{M} = \{y \in \mathbb{C}^n, \ \inp{y}{x} = 0\}\)
-
-\(\inp{Ay}{x} = \inp{y}{Ax} = \lambda \inp{y}{x} = 0\).
+\(AU = U\Lambda\)
 
 % finish the proof
 \end{proof}
@@ -338,10 +343,10 @@ Let \(M = \sup \{\abs{\inp{Ah}{h}} : \norm{h} = 1 \}\). If \(h, g \in \mathbb{C}
 \begin{equation*} \begin{split}
 \inp{A (h \pm g)}{h\pm g} & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{Ag}{h} + \inp{Ag}{g} \\
 & = \inp{Ah}{h} \pm \inp{Ah}{g} \pm \inp{g}{Ah} + \inp{Ag}{g} \\
-& = \inp{Ah}{h} \pm 2 \text{Re}(\inp{Ah}{g}) + \inp{Ag}{g} \\
+& = \inp{Ah}{h} \pm 2 \text{Re}\inp{Ah}{g} + \inp{Ag}{g} \\
 \end{split} \end{equation*}
 
-Using this, we get 
+From this, we get a bound on \(\mathrm{Re}\inp{Ah}{g}\):
 \begin{equation*} \begin{split}
 4\mathrm{Re} \inp{Ah}{g} &= \inp{A(h+g)}{h+g} - \inp{A(h-g)}{h-g} \\
 & \le \abs{\inp{A(h+g)}{h+g}} + \abs{\inp{A(h-g)}{h-g}} \\
@@ -360,7 +365,6 @@ We also have the following relation
  \[\norm{A} = \sup_{\norm{h} =1} \norm{Ah} = \sup_{\norm{h = 1}} \sup_{\norm{g} = 1} \abs{\inp{Ah}{g}} \]
 
 Therefore \(\abs{\inp{Ah}{g}} \le M\)  implies \(\norm{A} \le M\). Since \(\norm{A} \ge M\) and \(\norm{A} \le M\) both hold true, it means that \(\norm{A} = M = \sup \{ \abs{\inp{Ah}{h}} : \norm{h} = 1 \}\).
-%\[\abs{\inp{Ah}{g}} = \]
 \end{proof}
 
 \begin{corollary} If \(\inp{Ax}{x} = 0\) for all \(x\), then \(A = 0\).\end{corollary}
@@ -372,8 +376,11 @@ Therefore \(\abs{\inp{Ah}{g}} \le M\)  implies \(\norm{A} \le M\). Since \(\norm
 
 
 
-\begin{theorem}[Courant-Fischer] Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\). Let \(w_1, w_2, w_3, \ldots , w_n\) denote the respective eigenvectors.  Then 
-  \[ \lambda_k = \min_{w_1, \ldots , w_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp w_1, \ldots , w_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+\begin{theorem}[Courant-Fischer] Let \(A \in \mathbb{M}_n\) be a Hermitian matrix with eigenvalues \(\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots \le \lambda_n\).  Then 
+\begin{equation*}\begin{split}
+ \lambda_k &= \min_{w_1, \ldots , w_{n-k} \in \mathbb{C}^n} \max_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp w_1, \ldots , w_{n-k}}} \frac{\inp{Ax}{x}}{\inp{x}{x}} \\
+& = \max_{w_1, \ldots , w_{k -1} \in \mathbb{C}^n} \min_{\substack{x \neq 0, x\in \mathbb{C}^n \\ x \perp w_1, \ldots , w_{k - 1}}} \frac{\inp{Ax}{x}}{\inp{x}{x}}
+\end{split} \end{equation*}
  \end{theorem}
 
 
@@ -442,7 +449,7 @@ Let \(S\), the {\em shift matrix},  be the \(n \times n\) square matrix \( \begi
 
 % \begin{remark} \(\norm{S} < 1\) \end{remark}
 
-Related useful matrices: 
+The following matrices will be useful in proving the Schur-Cohn theorem. Note that \(I - \adj{S} S = e_1 \adj{e_1}\) is a projector matrix.
 \[\adj{S} =  \begin{bmatrix} 
 0 & 0 & \cdots & 0 & 0 \\
 1 & 0 & \cdots & 0 & 0 \\
@@ -457,7 +464,7 @@ Related useful matrices:
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & 0 & \cdots & 1
 \end{bmatrix}, \quad 
- I - S \adj{S} =  \begin{bmatrix} 
+ I - \adj{S} S =  \begin{bmatrix} 
 1 & 0 & \cdots & 0 & 0 \\
 0 & 0 & \cdots & 0 & 0 \\
 \vdots & \vdots & \ddots &\vdots & \vdots \\
@@ -465,19 +472,17 @@ Related useful matrices:
 0 & 0 & \cdots & 0 & 0
 \end{bmatrix}\]
 
-The last one \(I - \adj{S} S\) is a projector. 
 
 
 \section{Schur-Cohn Theorem}
 
 \subsection{Theorem}
-Given any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + a_2 z^{n-2} + \cdots +  a_{n-1} z + a_n\] with complex coefficients, we are interested in finding how many of its roots lie within the unit circle and how many roots lie outside.
+For any polynomial \[p(z) = a_0 z^n + a_1z^{n-1} + a_2 z^{n-2} + \cdots +  a_{n-1} z + a_n, \quad a_i \in \mathbb{C}\]  such that none of the roots lie on the unit circle \(|z| = 1\),  and \(p(0) \ne 0\), we want to find out how many of its roots lie inside the unit circle (\(|z| < 1\))  and how many roots lie outside (\(|z| > 1\)).
 
  Without loss of generality, let \(a_0 = 1\) as it does not change the roots of the polynomial. Suppose \(p\) has roots \(\alpha_i\). Then \(p(z) = (z - \alpha_1) (z - \alpha_2) \cdots (z - \alpha_n)\). 
 
 Note that \(p(S) \) is \( \begin{bmatrix} 
 
-% replace zeroes with dots
 a_n & a_{n-1} & a_{n-2} & \cdots & a_1 \\
 0 & a_n & a_{n-1} & \cdots & a_2 \\
 0 & 0 & a_n & \cdots & a_3 \\
@@ -508,18 +513,20 @@ The matrix \(q(S)\) can be factorized as
  Denote \( I -  \conj{\alpha_j} S\) by \(C_j\). Then \(q(S) =\displaystyle \prod_{j=1}^n C_j = C_1 C_2 C_3 \cdots C_n\).
 
 
-Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
-\begin{equation*} \begin{split}
-\norm{ q(S) x }^2 - \norm{ p(S) x}^2 &= \inp{q(S)x}{q(S)x} - \inp{p(S)x}{p(S)} \\
-& = \inp{\adj{q}(S) q(S) x}{x} - \inp{\adj{p}(S) p(S) x}{x} \\
-& = \inp{(\adj{q}(S) q(S) - \adj{p} (S) p(S) ) x}{x} \\
-\end{split} \end{equation*}
-The \(n \times n\) matrix corresponding to this Hermitian form is  \(H = \adj{q}(S) q(S) - \adj{p}(S) p(S)\).
+%Let \(\underline{H}\) be the Hermitian form \(\norm{ q(S) x }^2 - \norm{ p(S) x}^2\). 
+%\begin{equation*} \begin{split}
+%\norm{ q(S) x }^2 - \norm{ p(S) x}^2 &= \inp{q(S)x}{q(S)x} - \inp{p(S)x}{p(S)} \\
+%& = \inp{\adj{q}(S) q(S) x}{x} - \inp{\adj{p}(S) p(S) x}{x} \\
+%& = \inp{(\adj{q}(S) q(S) - \adj{p} (S) p(S) ) x}{x} \\
+%\end{split} \end{equation*}
+%The \(n \times n\) matrix corresponding to this Hermitian form is 
 
 
 We now state the Schur-Cohn theorem:
 
-\begin{theorem} [Schur-Cohn] The polynomial \(p\), it will have \(k\) roots inside the circle \(|z| = 1\), and \(n-k\) roots outside the circle if and only if \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
+\begin{theorem} [Schur] Consider the matrix  \[H = \adj{q}(S) q(S) - \adj{p}(S) p(S)\] The polynomial \(p\) will have all its roots inside the unit circle \(|z| = 1\) if and only if \(H\) is positive definite. It will have all the roots outside the unit circle if and only if \(H\) is negative definite. \end{theorem}
+
+\begin{theorem} [Cohn Generalization] The polynomial \(p\), it will have \(k\) roots inside the circle \(|z| = 1\), and \(n-k\) roots outside the circle if and only if \(k\) eigenvalues of \(H\) are positive and \(n-k\) are negative. \end{theorem}
 
 \subsection{Proof}
 %The proof is trivial and is left as an exercise to the reader. 
@@ -538,62 +545,79 @@ For \(n =1\), this is equal to \(\adj{C_1} C_1 - \adj{B_1} B_1\).
  & = (I - \alpha_1\adj{S} - \conj{\alpha_1}S + \abs{\alpha_1}^2 \adj{S} S) - (\adj{S} S - \alpha_1 \adj{S} - \conj{\alpha_1} S + \abs{\alpha_1}^2I)\\
 & = I - \abs{\alpha_1}^2 I - \adj{S} S + \abs{\alpha_1}^2 \adj{S} S \\
 & = (1 - \abs{\alpha_1}^2) (I - \adj{S} S) \\
+& = (1 - \abs{\alpha_1}^2) e_1 \adj{e_1} 
 \end{split}
 \end{equation*}
 
-For \(n = 1\), \(I - \adj{S}S\) is just a \(1 \times 1\) matrix, so \(H = \begin{bmatrix} 1 - \abs{\alpha_1}^2 \end{bmatrix}\). 
+For \(n = 1\), \(I - \adj{S}S\) is a \(1 \times 1\) matrix, so \(H = \begin{bmatrix} 1 - \abs{\alpha_1}^2 \end{bmatrix}\). 
 
 
 
-Note that \(I - \adj{S} S\) is a posititve definite matrix. If \(\abs{\alpha_1} < 1\), then the root of the linear polynomial lies within the unit circle. Also note that \(H\) has one negative eigenvalue. Similarly, if \(\abs{\alpha_1} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is positive. This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\). 
+Note that \(I - \adj{S} S\) is a posititve definite matrix of rank 1. 
+\begin{itemize}
+\item If \(\abs{\alpha_1} < 1\), then the root of the linear polynomial lies within the unit circle. Matrix \(H\) has one positive eigenvalue.
+\item Similarly, if \(\abs{\alpha_1} > 1\), then the root of the linear polynomial lies outside the unit circle, and the eigenvalue of \(H\) is negative. \end{itemize}
 
-
-For general \(n\),  
+ This shows that the Schur-Cohn theorem is true for \(n = 1\). We will now extend the proof for all \(n\).
 \begin{equation*} \begin{split}
 H & =  \adj{q}(S) q(S) - \adj{p}(S) p(S) \\
 &= \adj{(C_1C_2C_3 \ldots C_n)}(C_1C_2C_3\ldots C_n) - \adj{(B_1B_2B_3\ldots B_n)} (B_1B_2B_3\ldots B_n) \\
 & = (\adj{C_n} \cdots \adj{C_1})( C_1 \cdots C_n) - (\adj{B_n} \cdots \adj{B_1}) (B_1 \cdots B_n) 
 \end{split} \end{equation*}
 
-%Fit the remarks into the proof.
-\begin{remark} \(B_i\) commutes with \(C_j\). \end{remark}
-\begin{remark} \(1 - \adj{S} S = e_1 \adj{e_1}\). \end{remark}
-\begin{remark}\(\adj{C_j} C_j - \adj{B_j} B_j  = (1 - \abs{\alpha_j}^2) (1 - \adj{S} S)  = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}\) \end{remark}
-
+\(B_i\) commutes with \(C_j\), so we can rearrange their order in each term according to our convenience. 
 We can add and subtract terms to get a telescoping series:
 
-\[\begin{array}{cccc}
-  & (\adj{C_n} \cdots \adj{C_2}) \adj{C_1} C_1 ( C_2 \cdots C_n) & - & (\adj{C_n} \cdots \adj{C_2}) \adj{B_1} B_1 (C_2 \cdots C_n) \\
- + & \adj{B_1} (\adj{C_n} \cdots \adj{C_3}) \adj{C_2} C_2( C_2 \cdots C_n) B_1 & -& \adj{B_1}(\adj{C_n} \cdots \adj{C_3}) \adj{B_2} B_2(C_3 \cdots C_n) B_1 \\
-    + & \adj{B_1} \adj{B_2} (\adj{C_n} \cdots \adj{C_4})\adj{C_3} C_3( C_4 \cdots C_n) B_2 B_1& -& \adj{B_1} \adj{B_2}(\adj{C_n} \cdots \adj{C_4})\adj{B_3} B_3 (C_4 \cdots C_n) B_2 B_1 \\
- + & \vdots & -& \vdots  \\
- + & \vdots & -& \vdots  \\
- + & (\adj{B_1} \adj{B_2} \cdots \adj{B_{n-1}}) \adj{C_n} C_n  (B_{n-1} \cdots  B_2 B_1) & -& (\adj{B_1} \cdots \adj{B_{n-1}})\adj{B_n} B_n (B_{n-1} \cdots B_1) \\
+\[\begin{array}{ccccc}
+H = &   & (\adj{C_n} \cdots \adj{C_2}) \adj{C_1} C_1 ( C_2 \cdots C_n) & - & (\adj{C_n} \cdots \adj{C_2}) \adj{B_1} B_1 (C_2 \cdots C_n) \\
+& + & \adj{B_1} (\adj{C_n} \cdots \adj{C_3}) \adj{C_2} C_2( C_2 \cdots C_n) B_1 & -& \adj{B_1}(\adj{C_n} \cdots \adj{C_3}) \adj{B_2} B_2(C_3 \cdots C_n) B_1 \\
+&    + & \adj{B_1} \adj{B_2} (\adj{C_n} \cdots \adj{C_4})\adj{C_3} C_3( C_4 \cdots C_n) B_2 B_1& -& \adj{B_1} \adj{B_2}(\adj{C_n} \cdots \adj{C_4})\adj{B_3} B_3 (C_4 \cdots C_n) B_2 B_1 \\
+& + & \vdots & -& \vdots  \\
+& + & \vdots & -& \vdots  \\
+& + & (\adj{B_1} \adj{B_2} \cdots \adj{B_{n-1}}) \adj{C_n} C_n  (B_{n-1} \cdots  B_2 B_1) & -& (\adj{B_1} \cdots \adj{B_{n-1}})\adj{B_n} B_n (B_{n-1} \cdots B_1) \\
 \end{array}\]
 
-\begin{equation*} \begin{split}
-& = \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) (\adj{C_j} C_j - \adj{B_j} B_j) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \\
-& = \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) ((1-\abs{\alpha_j}^2) e_1 \adj{e_1}) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \\
-& =  \sum_{j=1} ^n (1-\abs{\alpha_j}^2) v_j \adj{v_j}, \text{ where } v_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1.
-\end{split}\end{equation*}
 
+\[= \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) (\adj{C_j} C_j - \adj{B_j} B_j) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \]
+
+
+In the case of \(p\) being a linear polynomial, we saw that \(\adj{C_j} C_j - \adj{B_j} B_j  = (1 - \abs{\alpha_j}^2) (I - \adj{S} S)  = (1 - \abs{\alpha_j}^2) e_1 \adj{e_1}\). Hence, 
+\begin{equation*}\begin{split}
+H & = \sum_{j = 1} ^n (\adj{B_1} \adj{B_2} \cdots \adj{B_{j-1}})(\adj{C_{n}} \cdots \adj{C_{j+1}}) ((1-\abs{\alpha_j}^2) e_1 \adj{e_1}) (C_{j+1} \cdots C_n) (B_{j-1} \cdots B_2 B_1) \\
+& =  \sum_{j=1} ^n (1-\abs{\alpha_j}^2) v_j \adj{v_j}, \quad \text{ where } v_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1.\\
+\end{split} \end{equation*}
 % We get \(H =\displaystyle \sum_{j=1} ^n (1-\abs{\alpha_j}^2) V_j \adj{V_j}\), where \(V_j = \adj{B_1} \cdots \adj{B_{j-1}} \adj{C_{j+1}} \cdots \adj{C_n} e_1\)
 
-\(V = \begin{bmatrix} v_1 & v_2 & v_3 & \cdots & v_n \end{bmatrix} \). 
+Let \(V\) be the matrix with columns \(v_i\), let \(D\) be the diagonal matrix with \(d_{ii} = 1 - \abs{\alpha_i}^2\), 
+\[V = \begin{bmatrix} v_1 & v_2 & v_3 & \cdots & v_n \end{bmatrix} \]
 
-\(D = \begin{bmatrix} 1 - \abs{\alpha_1}^2 & 0 & 0 & \cdots & 0 \\
+\[D = \begin{bmatrix} 1 - \abs{\alpha_1}^2 & 0 & 0 & \cdots & 0 \\
 0 & 1 - \abs{\alpha_2}^2 & 0 & \cdots & 0 \\
 0 & 0 & 1- \abs{\alpha_3}^2 & \cdots & 0 \\
 \vdots & \vdots & \vdots & \ddots& \vdots \\
-0 & 0 & 0 & \cdots & 1 - \abs{\alpha_n}^2 \end{bmatrix}\)
+0 & 0 & 0 & \cdots & 1 - \abs{\alpha_n}^2 \end{bmatrix}\]
+
+then 
+\[H = V D \adj{V}\]
+
+The matrix \(H\) is invertible, therefore \(V\) is also invertible. 
 
 
-\[H = \sum_{j = 1} ^n (1 - \abs{\alpha_j}^2) v_j \adj{v_j} = V D \adj{V}\]
+\begin{lemma} \(H\) is invertible if and only if \(D\) is invertible \end{lemma}
+\begin{proof}
 
-\(H\) is invertible \(\iff\) \(V\) is invertible. 
+Let \(H\) be positive definite (\(\Rightarrow\)). Then
 
-Let \(D\) be positive definite. 
+\begin{equation*} \begin{split}
+\inp{Dx}{x} & = \inp{V^{-1} H (\adj{V}) ^{-1}x}{x} \\
+& = \inp{(V^{-1}) H \adj{(V^{-1})}}{x} \\
+& = \inp{ H \adj{(V^{-1})}}{ \adj{(V^{-1})}x}\\
+& = \inp{Hy}{y} \\
+& = \sum_{j =1}^n (1 - \abs{\alpha_j}^2) \abs{y_j}^2 > 0\\
+\end{split} \end{equation*} 
 
+
+Let \(D\) be positive definite (\(\Leftarrow\)). Then 
 \begin{equation*}\begin{split}
 \inp{Hx}{x} & = \inp{VD\adj{V} x}{x} \\
 & = \inp{D\adj{V} x}{\adj{V}x} \\
@@ -601,40 +625,60 @@ Let \(D\) be positive definite.
 & = \sum_{j =1}^n (1 - \abs{\alpha_j}^2) \abs{y_j}^2 > 0
 \end{split} \end{equation*}
 
+\end{proof}
 
-Converse: Let \(H\) be positive definite
+Hence if all the roots of \(p(z)\) lie within the unit circle, then every eigenvalue of \(D\) is positive, so every eigenvalue of \(H\) is also positive. 
+Similarly if all the roots of \(p(z)\) lie outside the unit circle, then every eigenvalue of \(H\) is negative. 
 
-\(D = V^{-1} H (\adj{V}) ^{-1} = (V^{-1} H \adj{(V^{-1})} \implies \) \(D\) is positive definite.
+We will now look at the generalized version by Cohn, where some roots are inside the circle and some roots are outside.
+
+Let \(A\) be Hermitian. Its eigenvalues are \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n\). Using spectral theorem, 
+
+\[\frac{\inp{Ax}{x}}{\inp{x}{x}}  = \frac{\inp{U\Lambda \adj{U}x}{x}}{\inp{x}{x}} = \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} = \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2}\]
+
+\(\{x \in \mathbb{C}^n : x \ne 0\} = \{y \in \mathbb{C}^n : y = \adj{U} x \text{ for } x \ne 0 \} \) 
 
 
+We get the following inequality. 
+
+\[\lambda_1 = \lambda_1 \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} \le \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2} \le  \lambda_n \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} = \lambda_n\]
+
+Therefore \[ \lambda_1 \le \frac{\inp{Ax}{x}}{\inp{x}{x}} \le \lambda_n\]
+
+\[\lambda_1 = \inf _{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}, \quad \lambda_n = \sup_{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+
+We have found the minimum and maximum eigenvalues using the Spectral theorem. To find the intermediate eigenvalues, the Courant-Fischer theorem will be required. \\
 
 Let the eigenvalues of \(H\) be \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_k \le \cdots \le \lambda_n\).
 
-Let \(\lambda_k > 0\). Then given any \(w_1, w_2, \ldots , w_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x \perp w_1, w_2 , \ldots , w_{n-k}\) and \(\inp{Dx}{x} > 0\).
+Let \(\lambda_k\) be the smallest positive eigenvalue. Then given any \(w_1, w_2, \ldots , w_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x\) is orthogonal to \( w_1, w_2 , \ldots , w_{n-k}\) and \(\inp{Dx}{x} > 0\).
 
 \[\inp{Hx}{x} = \inp{VD\adj{V} x}{x} = \inp{D\adj{V} x}{\adj{V}x}\]
 
-Let \(w_1, w_2, \ldots , w_{n-k}\) be given. Let \(\inp{y}{w_i} = 0 \forall i\). Let \(x = \adj{V}y\). 
+Let \(w_1, w_2, \ldots , w_{n-k}\) be given. Let \(W\) be the subspace spanned by these vectors. Now let \(y \in W^\perp\) so \(\inp{y}{w_j} = 0\) for all \(j\). Let \(x = \adj{V}y\).  Then \( \inp{(\adj{V})^{-1}x}{w_i} = 0\), which implies  \( \inp{x}{V^{-1} w_i} = 0\). This implies \(x\) is orthogonal to all of \(V^{-1}w_1,  V^{-1} w_2, \ldots , V^{-1} w_{n-k}\).
 
-\(\inp{(\adj{V})^{-1}x}{w_i} = 0\) or \( \inp{x}{V^{-1} w_i} = 0\).
+Hence,
+\[\inp{Dx}{x} > 0 \implies \inp{V^{-1} H (\adj{V})^{-1} x}{x} > 0 \implies \inp{Hy}{y} > 0\]
 
-\(x \perp\) to all of \(V^{-1}w_1,  V^{-1} w_2, \ldots , V^{-1} w_{n-k}\).
+This means for every postive eigenvalue of \(D\), there is a positive eigenvalue of \(H\). Similarly, for every negative eigenvalue of \(D\), there is a negative eigenvalue of \(H\). 
 
-So \(\inp{Dx}{x} > 0\) or \(\inp{V^{-1} H V^{*^{-1}} x}{x} > 0\) or \(\inp{Hy}{y} > 0\).
+\begin{itemize}
+\item Thus, the number of roots inside the unit circle is equal to the number of positive eigenvalues of \(D\), which is equal to the number of positive eigenvalue of \(H\).
+ 
+\item Analogously, the number of roots outside the unit circle is equal to the number of negative eigenvalues of \(D\), which is equal to the number of negative eigenvalues of \(H\).
+\end{itemize}
+This concludes the proof of the Schur-Cohn theorem. \(_\square\)
 \subsection{Example}
 
-\section{Extensions}
+We will apply the Schur-Cohn theorem on the polynomial \(p(z) = x^2 + 5i x - 4\). 
 
-\subsection{Arbitrary radius}
-To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. 
-\subsection{Limitations}
-This method fails when the polynomial has one or more roots on the circle. 
 
 \section{Conclusion}
-Thank You!
 
-\section{Acknowledgements}
-Prof. Tirthankar Bhattacharya
+The algorithm described above was to determine the location of roots with respect to the unit circle. It can be modified to find the location of roots with respect to a circle of any radius about the origin. To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. 
+
+This method fails when the polynomial has one or more roots on the circle. To avoid this, compute the eigenvalues at a circle of a different radius. 
+% Refer to paper S C theorem revisited. 
 
 \section{References}
 
