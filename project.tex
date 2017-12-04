@@ -13,6 +13,9 @@
 \usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
 \usepackage{booktabs}
 
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{abstract}
@@ -79,7 +82,7 @@ We looked at various concepts in linear algebra such as norms, unitary matrices,
 
 \[\textbf{Acknowledgements}\]
 
-I am grateful to Prof. Tirthankar Bhattacharya for guiding me in this project, introducing me to interesting new concepts in mathematics, and making this an enriching experience altogether.
+I am grateful to Prof. Tirthankar Bhattacharya for guiding me in this project, introducing me to new concepts and ideas in mathematics, challenging me to improve myself, and  for making this an enriching experience altogether.
 \end{abstract}
 }
 
@@ -307,6 +310,25 @@ The basis transforms from \(x_i \mapsto \adj{U}x_i\)
 
 % finish the proof
 \end{proof}
+
+
+Let \(A\) be Hermitian. Its eigenvalues are \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n\). Using spectral theorem, 
+
+\[\frac{\inp{Ax}{x}}{\inp{x}{x}}  = \frac{\inp{U\Lambda \adj{U}x}{x}}{\inp{x}{x}} = \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} = \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2}\]
+
+\(\{x \in \mathbb{C}^n : x \ne 0\} = \{y \in \mathbb{C}^n : y = \adj{U} x \text{ for } x \ne 0 \} \) 
+
+
+We get the following inequality. 
+
+\[\lambda_1 = \lambda_1 \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} \le \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2} \le  \lambda_n \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} = \lambda_n\]
+
+Therefore \[ \lambda_1 \le \frac{\inp{Ax}{x}}{\inp{x}{x}} \le \lambda_n\]
+
+\[\lambda_1 = \inf _{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}, \quad \lambda_n = \sup_{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
+
+
+
 
 \begin{theorem} \label{hermit_real} If \(A \in \mathbb{M}_n\) is Hermitian, then \(\inp{Ax}{x}\) is real for all \(x\). \end{theorem}
 \begin{proof} \(\inp{Ax}{x} = \inp{x}{\adj{A}x} = \inp{x}{Ax} = \conj{\inp{Ax}{x}}\). \end{proof}
@@ -600,7 +622,7 @@ Let \(V\) be the matrix with columns \(v_i\), let \(D\) be the diagonal matrix w
 then 
 \[H = V D \adj{V}\]
 
-The matrix \(H\) is invertible, therefore \(V\) is also invertible. 
+If matrix \(H\) is invertible, then matrix \(V\) is also invertible. 
 
 
 \begin{lemma} \(H\) is invertible if and only if \(D\) is invertible \end{lemma}
@@ -632,30 +654,21 @@ Similarly if all the roots of \(p(z)\) lie outside the unit circle, then every e
 
 We will now look at the generalized version by Cohn, where some roots are inside the circle and some roots are outside.
 
-Let \(A\) be Hermitian. Its eigenvalues are \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n\). Using spectral theorem, 
-
-\[\frac{\inp{Ax}{x}}{\inp{x}{x}}  = \frac{\inp{U\Lambda \adj{U}x}{x}}{\inp{x}{x}} = \frac{\inp{\Lambda y}{y}}{\inp{y}{y}} = \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2}\]
-
-\(\{x \in \mathbb{C}^n : x \ne 0\} = \{y \in \mathbb{C}^n : y = \adj{U} x \text{ for } x \ne 0 \} \) 
 
 
-We get the following inequality. 
-
-\[\lambda_1 = \lambda_1 \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} \le \frac{\sum \lambda_i \abs{y_i}^2}{\sum \abs{y_i}^2} \le  \lambda_n \frac{\sum \abs{y_i}^2}{\sum \abs{y_i}^2} = \lambda_n\]
-
-Therefore \[ \lambda_1 \le \frac{\inp{Ax}{x}}{\inp{x}{x}} \le \lambda_n\]
-
-\[\lambda_1 = \inf _{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}, \quad \lambda_n = \sup_{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}}\]
-
-We have found the minimum and maximum eigenvalues using the Spectral theorem. To find the intermediate eigenvalues, the Courant-Fischer theorem will be required. \\
 
 Let the eigenvalues of \(H\) be \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_k \le \cdots \le \lambda_n\).
+From the Spectral theorem, we get the values of the lowest and the highest eigenvalues. 
+\[\lambda_1 = \inf _{x \ne 0} \frac{\inp{Hx}{x}}{\inp{x}{x}}, \quad \lambda_n = \sup_{x \ne 0} \frac{\inp{Hx}{x}}{\inp{x}{x}}\]
+
+To find the intermediate eigenvalues, the Courant-Fischer theorem will be required. 
+
 
 Let \(\lambda_k\) be the smallest positive eigenvalue. Then given any \(w_1, w_2, \ldots , w_{n-k} \in \mathbb{C}^n\), we have some \(x \ne 0\) such that \(x\) is orthogonal to \( w_1, w_2 , \ldots , w_{n-k}\) and \(\inp{Dx}{x} > 0\).
 
 \[\inp{Hx}{x} = \inp{VD\adj{V} x}{x} = \inp{D\adj{V} x}{\adj{V}x}\]
 
-Let \(w_1, w_2, \ldots , w_{n-k}\) be given. Let \(W\) be the subspace spanned by these vectors. Now let \(y \in W^\perp\) so \(\inp{y}{w_j} = 0\) for all \(j\). Let \(x = \adj{V}y\).  Then \( \inp{(\adj{V})^{-1}x}{w_i} = 0\), which implies  \( \inp{x}{V^{-1} w_i} = 0\). This implies \(x\) is orthogonal to all of \(V^{-1}w_1,  V^{-1} w_2, \ldots , V^{-1} w_{n-k}\).
+ Let \(W\) be the subspace spanned by \(w_1, w_2, \ldots , w_{n-k}\). Now let \(y \in W^\perp\) so \(\inp{y}{w_j} = 0\) for all \(j\). Let \(x = \adj{V}y\).  Then \( \inp{(\adj{V})^{-1}x}{w_i} = 0\), which implies  \( \inp{x}{V^{-1} w_i} = 0\). This implies \(x\) is orthogonal to all of \(V^{-1}w_1,  V^{-1} w_2, \ldots , V^{-1} w_{n-k}\).
 
 Hence,
 \[\inp{Dx}{x} > 0 \implies \inp{V^{-1} H (\adj{V})^{-1} x}{x} > 0 \implies \inp{Hy}{y} > 0\]
@@ -667,20 +680,37 @@ This means for every postive eigenvalue of \(D\), there is a positive eigenvalue
  
 \item Analogously, the number of roots outside the unit circle is equal to the number of negative eigenvalues of \(D\), which is equal to the number of negative eigenvalues of \(H\).
 \end{itemize}
-This concludes the proof of the Schur-Cohn theorem. \(_\square\)
+This concludes the proof of the generalized Schur-Cohn theorem. \(_\square\)
 \subsection{Example}
 
-We will apply the Schur-Cohn theorem on the polynomial \(p(z) = x^2 + 5i x - 4\). 
+We will apply the Schur-Cohn theorem on the polynomial \(p(z) = x^2 + 4i x - 2i\).
 
+\begin{wrapfigure}{r}{0.25 \textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{roots1}
+\end{wrapfigure}
 
+ \[\begin{array}{ccc}
+ p(S) = \begin{bmatrix} -2i & 4i \\0 &  -2i \end{bmatrix}, & \adj{p}(S) = \begin{bmatrix} 2i & 0 \\-4i  & 2i \end{bmatrix}, &\adj{p}(S) p(S) = \begin{bmatrix} 20 & -8 \\ -8 & 4 \end{bmatrix} \\
+ q(S) = \begin{bmatrix} 1 & 4 \\0 & 1 \end{bmatrix}, & \adj{q}(S) =\begin{bmatrix}1 & 0 \\4 & 1 \end{bmatrix}, &\adj{q}(S) q(S) = \begin{bmatrix} 17 & 4 \\ 4 & 1 \end{bmatrix}
+\end{array}\]
+
+We get matrix \(H\) as 
+\[H = \adj{q}(S) q(S) - \adj{p}(S) p(S) = \begin{bmatrix} -3 & 12 \\ 12 & -3 \end{bmatrix} = 3 \begin{bmatrix} -1 & 4 \\ 4 & -1 \end{bmatrix}\]
+
+The eigenvalues of this matrix are \(-5\) and \(3\). Since one eigenvalue is positive and one is negative, by Schur-Cohn theorem, it means that the polynomial has one root inside the unit circle and one root outside the unit circle. Indeed when the roots are plotted, this result is verified:
+%Plot the roots
+
+\clearpage
 \section{Conclusion}
 
-The algorithm described above was to determine the location of roots with respect to the unit circle. It can be modified to find the location of roots with respect to a circle of any radius about the origin. To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. 
+The algorithm described above was to determine the location of roots with respect to the unit circle. It can be modified to find the location of roots with respect to a circle of any radius about the origin. To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. This algorithm can be even used to find the number in one half plane of \(\mathbb{C}\).
 
-This method fails when the polynomial has one or more roots on the circle. To avoid this, compute the eigenvalues at a circle of a different radius. 
-% Refer to paper S C theorem revisited. 
+This method fails when the polynomial has one or more roots on the circle, or if there is a conjugate pair of roots. \(H\) becomes singular and the algorithm fails.  To avoid this, compute the eigenvalues at a circle of a different radius. More workarounds are presented in these papers: Modified versions of this algorithm exist, which are faster but only state if all the roots are within the unit circle or not. 
+% Refer to paper S C theorem revisited.
 
-\section{References}
+This algorithm has a wide range of applications such as control theory, optimization and digital systems processing, where it is required that all the roots lie in a stability radius of a given point.
+\section*{References}
 
 
 \end{document}
