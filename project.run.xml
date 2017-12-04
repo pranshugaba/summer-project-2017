@@ -44,15 +44,15 @@
   <internal package="biblatex" priority="9" active="1">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>project.aux</file>
-      <file>project-blx.bib</file>
+      <file>project.bcf</file>
     </provides>
     <requires type="dynamic">
       <file>project.bbl</file>
     </requires>
     <requires type="static">
+      <file>blx-dm.def</file>
       <file>blx-compat.def</file>
-      <file>biblatex_legacy.def</file>
+      <file>biblatex.def</file>
       <file>numeric.bbx</file>
       <file>standard.bbx</file>
       <file>numeric.cbx</file>
@@ -61,14 +61,13 @@
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="1">
-    <generic>bibtex</generic>
+    <generic>biber</generic>
     <cmdline>
-      <binary>bibtex</binary>
-      <option>-min-crossrefs 2</option>
+      <binary>biber</binary>
       <infile>project</infile>
     </cmdline>
     <input>
-      <file>project.aux</file>
+      <file>project.bcf</file>
     </input>
     <output>
       <file>project.bbl</file>
@@ -77,14 +76,10 @@
       <file>project.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>project.aux</file>
-      <file>project-blx.bib</file>
+      <file>project.bcf</file>
     </requires>
     <requires type="editable">
-      <file>hello.bib</file>
-    </requires>
-    <requires type="static">
-      <file>biblatex.bst</file>
+      <file>herm.bib</file>
     </requires>
   </external>
 </requests>

@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Definitions}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Inner product}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Adjoint}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Positive Definite}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Hermitian Matrices}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Unitary Matrices}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Matrix S}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Norm of a matrix}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.7.1}{Operator norm}{subsection.2.7}% 10
+\BOOKMARK [3][-]{subsubsection.2.7.2}{Hilbert-Schmidt norm}{subsection.2.7}% 11
+\BOOKMARK [2][-]{subsection.2.8}{Trace}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.9}{Diagonalization}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.10}{Projectors}{section.2}% 14
+\BOOKMARK [1][-]{section.3}{Schur-Cohn Theorem}{}% 15
+\BOOKMARK [1][-]{section.4}{Proof}{}% 16
+\BOOKMARK [2][-]{subsection.4.1}{Linear Polynomial}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.2}{Spectral theorem}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.3}{Courant-Fischer theorem}{section.4}% 19
+\BOOKMARK [1][-]{section.5}{Extensions}{}% 20
+\BOOKMARK [2][-]{subsection.5.1}{Arbitrary radius}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.2}{Limitations}{section.5}% 22
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 23
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 24

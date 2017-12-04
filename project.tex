@@ -10,6 +10,7 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 
+\usepackage{cite}
 
 \usepackage[hmarginratio=1:1, top=32mm,columnsep=20pt]{geometry}
 \usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
@@ -151,7 +152,7 @@ The inner product is a binary operator on two vectors \(\inp{\cdot}{\cdot} \colo
  
 \(\quad \inp{x + y}{z} = \inp{x}{z} + \inp{y}{z}\)
 
-\item It becomes its complex conjugate when the arguments are reversed.
+\item It becomes its complex conjugate when its arguments are reversed.
 
 \(\quad \inp{x}{y} = \conj{\inp{y}{x}}\)
 
@@ -168,7 +169,7 @@ A matrix \(A\in \mathbb{M}_n\) that satisfies \(\inp{Ax}{x} \ge 0\) for all \(x 
 
 For two matrices \(A, B \in \mathbb{M}_n\), \(A \le B\) denotes \(B - A\) is positive semidefinite. As a result, \(\inp{(B - A)x}{x} \ge 0\), or \(\inp{Ax}{x} \le \inp{Bx}{x}\) for all \(x\).
 
-\begin{theorem} Let \(A \in \mathbb{M}_n\) be a positive semidefinite matrix. Then all eigenvalues of \(A\) are non-negative. \end{theorem}
+\begin{theorem} Let \(A \in \mathbb{M}_n\) be positive semidefinite. Then all eigenvalues of \(A\) are non-negative. \end{theorem}
 \begin{proof} Let \(\lambda_1, \lambda_2, \ldots , \lambda_n\) be the eigenvalues of \(A\), and let \(x_1, x_2, \ldots , x_n\) be the corresponding eigenvectors, that is: \(Ax_i = \lambda x_i\). 
 
  For any eigenvector \(x_i\), the inner product \(\inp{Ax_i}{x_i} = \inp{\lambda_i x_i}{x_i}\). Since \(\lambda_i\) is a scalar, it can come out of the inner product, so  \( \inp{\lambda_i x_i}{x_i}  = \lambda_i \inp{x_i}{x_i}\). We get
@@ -180,7 +181,7 @@ Here \(\inp{Ax_i}{x_i} \) is non-negative because \(A\) is positive semidefinite
 
 \subsection{Adjoint}
 
-Let \(A \in \mathbb{M}_n\). The adjoint of matrix \(A\), denoted by \(\adj{A}\), is the matrix that  satisfies \(\inp{\adj{A}x}{y} = \inp{x}{Ay}\). The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\).
+The adjoint of a matrix \(A \in \mathbb{M}_n\), denoted by \(\adj{A}\), is the matrix that  satisfies \(\inp{\adj{A}x}{y} = \inp{x}{Ay}\). The adjoint of a matrix, \(\adj{A}\), like \(A\), represents a linear transformation on \(\mathbb{C}^n\).
 
 \begin{theorem} The adjoint of a matrix is obtained by taking the complex conjugate of every element, followed by transposing the matrix. \end{theorem}
 
@@ -235,7 +236,7 @@ We see that \(\adj{u_i} u_j = \inp{u_i}{u_j} = \delta_{ij}\). Here \(\delta_{ij}
  \]
 
 
-Each column has norm 1 since \(\inp{u_i}{u_i}= \norm{u_i}^2  =1\), and any two columns are orthogonal \(\inp{u_i}{u_j} = 0\). Hence the column vectors \(u_1, u_2, \ldots , u_n\) of a unitary matrix form an orthonormal basis.
+Each column has norm 1 since \(\inp{u_i}{u_i}= \norm{u_i}^2  =1\), and any two columns are orthogonal \(\inp{u_i}{u_j} = 0\). Hence the column vectors \(\{u_1, u_2, \ldots , u_n\}\) of a unitary matrix form an orthonormal basis.
     \end{proof}
 
 
@@ -244,7 +245,7 @@ Each column has norm 1 since \(\inp{u_i}{u_i}= \norm{u_i}^2  =1\), and any two c
 \begin{proof} \(\inp{x}{y} = \inp{Ix}{y} = \inp{\adj{U}U x}{y} = \inp{Ux}{Uy}\) \end{proof}
 
 \subsection{Trace}
-The trace of matrix \(A\) is the sum of the diagonal elements of the matrix.
+The trace of matrix \(A \in \mathbb{M}_n\) is the sum of the diagonal elements of the matrix.
 
 \[\Tr(A) = \sum_{i=1} ^n a_{ii} = \sum_{i=1} ^n \inp{Ae_i}{ e_i}\]
 
@@ -271,7 +272,7 @@ Let \(v\) be an eigenvector of a matrix \(A\), and let \(\lambda\) be the corres
 
 \[ \lambda\inp{v}{v} = \inp{\lambda v}{v} =  \inp{Av}{v} = \inp{v}{\adj{A}v} = \inp{v}{Av} = \inp{v}{\lambda v} = \conj{\lambda} \inp{v}{v}\]
 
-This implies \(\lambda = \conj{\lambda}\) for all \(v\). Hence, \(\lambda\) is real. All eigenvalues of a Hermitian matrix are real.
+This implies \(\lambda = \conj{\lambda}\) for all \(v\). Hence, \(\lambda\) is real. Therefore, all eigenvalues of a Hermitian matrix are real.
  \end{proof}
 
 
@@ -282,7 +283,7 @@ This implies \(\lambda = \conj{\lambda}\) for all \(v\). Hence, \(\lambda\) is r
 
 \[ \lambda \inp{u}{v} = \inp{\lambda u}{v} = \inp{A u}{v} = \inp{u}{Av} = \inp{u}{\mu v} = \mu \inp{u}{v} \]
 
-Since \(\lambda \ne \mu\), \(\inp{u}{v}\) must be zero. Eigenvectors \(u\) and \(v\) are orthogonal.
+Since \(\lambda \ne \mu\), \(\inp{u}{v}\) must be zero. Therefore, eigenvectors \(u\) and \(v\) are orthogonal.
 
 \end{proof}
 
@@ -302,11 +303,11 @@ Since \(\lambda \ne \mu\), \(\inp{u}{v}\) must be zero. Eigenvectors \(u\) and \
 Since \(U\) is unitary, we have \(\adj{U} U = I\), or \(U^{-1} = \adj{U}\). Thus  \(A = U \Lambda \adj{U}\) is equivalent to \(\Lambda = \adj{U} A U\).
 
 
-The matrix \(A\) is a linear transformation \(T\) with respect to the standard basis \(I\). The matrix \(U\) is a unitary matrix, so its columns \(u_1, u_2, \ldots , u_n\) form an orthonormal basis for \(\Lambda\). Since \(\adj{U} = U^{-1}\), it means \(\adj{U} A U = U^{-1}AU\). This means \(\Lambda\) is the matrix of the same transformation \(T\) with respect to a different basis \(U\), and that \(A\) and \(\Lambda\) have the same eigenvalues.
+The matrix \(A\) is a linear transformation \(T\) with respect to the standard basis \(I\). The matrix \(U\) is a unitary matrix, so its columns \(\{u_1, u_2, \ldots , u_n\}\) form an orthonormal basis for \(\Lambda\). Since \(\adj{U} = U^{-1}\), it means \(\adj{U} A U = U^{-1}AU\). This means \(\Lambda\) is the matrix of the same transformation \(T\) with respect to a different basis \(U\), and that \(A\) and \(\Lambda\) have the same eigenvalues.
 
 Start with any eigenvalue \(\lambda_1\) of \(A\). Let \(u_1\) be the corresponding unit eigenvector. Let \(W\) be the subspace of \(\mathbb{C}^n\) spanned by \(u_1\).
 
-If we choose an orthonormal basis \(u_2, u_3, \ldots , u_n\) of \(W^\perp\), then \(u_1, u_2, u_3, \ldots , u_n\) will be an orthonormal basis for \(\mathbb{C}^n\).  Then the block matrix of \(T\) in this basis will be 
+If we choose an orthonormal basis \(\{u_2, u_3, \ldots , u_n\}\) of \(W^\perp\), then \(\{u_1, u_2, u_3, \ldots , u_n\}\) will be an orthonormal basis for \(\mathbb{C}^n\).  Then the block matrix of \(T\) in this basis will be 
 
 \[\Lambda = \left[\begin{array}{c|ccc}
  \lambda_1 & &\alpha& \\ 
@@ -314,7 +315,7 @@ If we choose an orthonormal basis \(u_2, u_3, \ldots , u_n\) of \(W^\perp\), the
 0 & & A_1& \\ \\ \end{array} \right]\]
 
 Here \(\alpha\) and \(0\) are row and column vectors, and \(A_1\) is an \((n-1) \times (n-1)\) matrix. 
-Since \(\Lambda\) is Hermitian, \(\alpha = 0\) and \(A_1\) is a Hermitian matrix with basis \(u_2, u_3, u_4 , \ldots , u_n\) for transformation \(T\) restricted to \(W^\perp\). We can repeat this process until we get \(\Lambda\) as a diagonal matrix. 
+Since \(\Lambda\) is Hermitian, \(\alpha = 0\) and \(A_1\) is a Hermitian matrix with basis \(\{u_2, u_3, u_4 , \ldots , u_n\}\) for transformation \(T\) restricted to \(W^\perp\). We can repeat this process until we get \(\Lambda\) as a diagonal matrix. 
 \end{proof}
 
 \begin{theorem}[Rayleigh] If \(A\) is Hermitian, with eigenvalues \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n\), then 
@@ -371,7 +372,7 @@ Therefore \[ \lambda_1 =  \inf _{x \ne 0} \frac{\inp{Ax}{x}}{\inp{x}{x}} \le \fr
  \end{theorem}
 
 
-\begin{proof} (Adapted from Horn Johnson \cite{horn_johnson_2013})
+\begin{proof} (Adapted from \cite{horn_johnson})
 Let \(x_1, x_2, \ldots , x_n \in \mathbb{C}^n\) be orthonormal vectors such that \(Ax_i = \lambda_i x_i\) for \(i = 1, 2, 3, \ldots , n\).  Let \(V\)  be any \(k\) dimensional subspace of \(\mathbb{C}^n\) and let \(V' = \mathrm{span}\{ x_k, x_{k + 1} , \ldots , x_n\}\). Then note that 
 \[\dim(V \cap V') = \dim(V) + \dim(V') - \dim(V \cup V')  = k + (n - k + 1)  - n =  1\]
 
@@ -683,7 +684,7 @@ We will now look at the generalized version by Cohn, where some roots are inside
 
 
 Let the eigenvalues of \(H\) be \(\lambda_1 \le \lambda_2 \le \cdots \le \lambda_k \le \cdots \le \lambda_n\).
-From the Spectral theorem, we get the values of the lowest and the highest eigenvalues. 
+From Rayleigh theorem, we get the values of the lowest and the highest eigenvalues. 
 \[\lambda_1 = \inf _{x \ne 0} \frac{\inp{Hx}{x}}{\inp{x}{x}}, \quad \lambda_n = \sup_{x \ne 0} \frac{\inp{Hx}{x}}{\inp{x}{x}}\]
 
 To find the intermediate eigenvalues, the Courant-Fischer theorem will be required. 
@@ -728,15 +729,14 @@ The eigenvalues of this matrix are \(-5\) and \(3\). Since one eigenvalue is pos
 \clearpage
 \section{Conclusion}
 
-The algorithm described above was to determine the location of roots with respect to the unit circle. It can be modified to find the location of roots with respect to a circle of any radius about the origin. To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. Combining this with bisection method with varying radii, it is possible to find the location of roots up to very thin disks.
+The algorithm described above can determine the location of roots with respect to the unit circle. It can be modified to find the location of roots with respect to a circle of any radius about the origin. To find the number of roots of \(p(z)\) inside a circle of radius \(r\), repeat the above Schur Cohn theorem but with the polynomial \(p(\frac{z}{r})\) instead. Combine this with bisection method with varying radii, and it is possible to find the location of roots up to very thin disks. This algorithm can be also be modified to find the number of roots of a polynomial in one half plane of \(\mathbb{C}\). 
 
-This algorithm can be also be modified to find the number of roots of a polynomial in one half plane of \(\mathbb{C}\). Modified versions of the Schur-Cohn algorithm exist, which are faster but only state if all the roots are within the unit circle or not. 
+This algorithm fails when \(\conj{\alpha}\) and \(\frac{1}{\alpha}\) are both roots of the polynomial for  \(\alpha \in \mathbb{C}\). All the points on the unit circle will satisfy this condition \(p(\conj{\alpha}) = p(\frac{1}{\alpha}) = 0\). In such a case, \(H\) becomes singular and the algorithm fails.  To avoid this, one workaround is to compute the eigenvalues at a circle of a different radius. If the polynomial does not have repeated zeros, then another way is to fix this is to apply the Schur-Cohn test on the derivative of \(p\) \cite{zero_loc_herm}. More ways to fix this issue are presented in \cite{revisited}.
 
-This algorithm fails when \(\conj{\alpha}\) and \(\frac{1}{\alpha}\) are both roots of the polynomial for some \(\alpha \in \mathbb{C}\). All the points on the unit circle will satisfy this condition \(p(\conj{\alpha}) = p(\frac{1}{\alpha}) = 0\). In such a case, \(H\) becomes singular and the algorithm fails.  To avoid this, one workaround is to compute the eigenvalues at a circle of a different radius. If the polynomial does not have repeated zeros, then another way is to fix this is to apply the Schur-Cohn test on the derivative of \(p\).
 
- More different ways to fix this  are presented in these papers: %insert references here.
-% Refer to paper S C theorem revisited.
+\nocite{zero_loc_schur_cohn}
 
-\section*{References}
+\bibliography{herm_bib}{}
+\bibliographystyle{unsrt}
 
 \end{document}

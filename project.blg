@@ -1,9 +1,46 @@
-[0] Config.pm:340> INFO - This is Biber 2.4
-[0] Config.pm:343> INFO - Logfile is 'project.blg'
-[63] biber:287> INFO - === Tue Dec  5, 2017, 00:31:22
-[197] Biber.pm:348> INFO - Reading 'project.bcf'
-[406] Biber.pm:742> INFO - Found 0 citekeys in bib section 0
-[407] Utils.pm:147> WARN - The file 'project.bcf' does not contain any citations!
-[414] bbl.pm:519> INFO - Writing 'project.bbl' with encoding 'ascii'
-[416] bbl.pm:615> INFO - Output to project.bbl
-[416] Biber.pm:109> INFO - WARNINGS: 1
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: project.aux
+The style file: unsrt.bst
+Database file #1: herm_bib.bib
+You've used 4 entries,
+            1791 wiz_defined-function locations,
+            468 strings with 4027 characters,
+and the built_in function-call counts, 1024 in all, are:
+= -- 96
+> -- 32
+< -- 2
++ -- 12
+- -- 8
+* -- 53
+:= -- 153
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 53
+empty$ -- 99
+format.name$ -- 8
+if$ -- 245
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 5
+newline$ -- 23
+num.names$ -- 4
+pop$ -- 14
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 36
+stack$ -- 0
+substring$ -- 72
+swap$ -- 20
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 9
+width$ -- 5
+write$ -- 45

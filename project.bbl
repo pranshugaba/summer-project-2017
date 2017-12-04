@@ -1,20 +1,24 @@
-% $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.6 $
-% Do not modify the above lines!
-%
-% This is an auxiliary file used by the 'biblatex' package.
-% This file may safely be deleted. It will be recreated by
-% biber as required.
-%
-\begingroup
-\makeatletter
-\@ifundefined{ver@biblatex.sty}
-  {\@latex@error
-     {Missing 'biblatex' package}
-     {The bibliography requires the 'biblatex' package.}
-      \aftergroup\endinput}
-  {}
-\endgroup
+\begin{thebibliography}{1}
 
-\endinput
+\bibitem{horn_johnson}
+Roger~A. Horn and Charles~R. Johnson.
+\newblock {\em Matrix analysis}.
+\newblock Cambridge University Press, 2013.
 
+\bibitem{zero_loc_herm}
+Vlastimil Ptak and N.~J. Young.
+\newblock {Zero Location by Hermitian Forms: The Singular Case}.
+\newblock {\em Linear Algebrea and its Applications}, 43:181--196, 1982.
+
+\bibitem{revisited}
+Petre Stoica and Randolph~L. Moses.
+\newblock {On the unit circle problem: The Schur-Cohn procedure revisited}.
+\newblock {\em Signal Processing}, pages 95--118, 1992.
+
+\bibitem{zero_loc_schur_cohn}
+Vlastimil Ptak and N.~J. Young.
+\newblock {A Generalization of the Zero Location Theorem of Schur and Cohn}.
+\newblock {\em IEEE Transactions on Automatic Control}, pages 978--980, October
+  1980.
+
+\end{thebibliography}
